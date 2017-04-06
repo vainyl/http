@@ -13,8 +13,8 @@ declare(strict_types=1);
 namespace Vainyl\Http;
 
 use Psr\Http\Message\StreamInterface;
-use Psr\Http\Message\UploadedFileInterface;
 use Vainyl\Http\Exception\CannotMoveFileException;
+use Psr\Http\Message\UploadedFileInterface;
 
 /**
  * Class UploadedFile
