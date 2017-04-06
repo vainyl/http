@@ -21,7 +21,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @method ResponseInterface getCurrentMessage
  */
-abstract class ResponseStack extends AbstractMessageStack implements ResponseProxyInterface
+class ResponseStack extends AbstractMessageStack implements ResponseProxyInterface
 {
     /**
      * @inheritDoc
