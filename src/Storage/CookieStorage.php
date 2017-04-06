@@ -10,7 +10,7 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Cookie\Storage;
+namespace Vainyl\Http\Storage;
 
 use Vainyl\Core\Storage\Proxy\AbstractStorageProxy;
 
