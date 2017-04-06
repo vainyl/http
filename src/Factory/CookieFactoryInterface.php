@@ -8,11 +8,12 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Cookie\Factory;
+namespace Vainyl\Http\Factory;
 
-use Vainyl\Http\Cookie\CookieInterface;
+use Vainyl\Http\CookieInterface;
+use Vainyl\Time\TimeInterface;
 
 /**
  * Interface CookieFactoryInterface
@@ -22,23 +23,23 @@ use Vainyl\Http\Cookie\CookieInterface;
 interface CookieFactoryInterface
 {
     /**
-     * @param string                  $name
-     * @param string                  $value
-     * @param \DateTimeInterface|null $expiryDate
-     * @param string                  $path
-     * @param string                  $domain
-     * @param bool                    $secure
-     * @param bool                    $httpOnly
+     * @param string             $name
+     * @param string             $value
+     * @param TimeInterface|null $expiryDate
+     * @param string             $path
+     * @param string             $domain
+     * @param bool               $secure
+     * @param bool               $httpOnly
      *
      * @return CookieInterface
      */
     public function createCookie(
         string $name,
         string $value,
-        \DateTimeInterface $expiryDate = null,
+        TimeInterface $expiryDate = null,
         string $path = '/',
         string $domain = null,
         bool $secure = false,
         bool $httpOnly = false
-    ) : CookieInterface;
+    ): CookieInterface;
 }

@@ -8,9 +8,11 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Cookie;
+namespace Vainyl\Http;
+
+use Vainyl\Time\TimeInterface;
 
 /**
  * Interface VainCookieInterface
@@ -24,84 +26,84 @@ interface CookieInterface
      *
      * @return CookieInterface
      */
-    public function withName($name) : CookieInterface;
+    public function withName(string $name): CookieInterface;
 
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @param string $value
      *
      * @return CookieInterface
      */
-    public function withValue($value) : CookieInterface;
+    public function withValue(string $value): CookieInterface;
 
     /**
      * @return string
      */
-    public function getValue();
+    public function getValue(): string;
 
     /**
-     * @param \DateTimeInterface $expiryDate
+     * @param TimeInterface $expiryDate
      *
      * @return CookieInterface
      */
-    public function withExpiryDate(\DateTimeInterface $expiryDate) : CookieInterface;
+    public function withExpiryDate(TimeInterface $expiryDate): CookieInterface;
 
     /**
-     * @return \DateTimeInterface
+     * @return TimeInterface
      */
-    public function getExpiryDate();
+    public function getExpiryDate(): TimeInterface;
 
     /**
      * @param string $path
      *
      * @return CookieInterface
      */
-    public function setPath($path);
+    public function withPath($path): CookieInterface;
 
     /**
      * @return string
      */
-    public function getPath();
+    public function getPath(): string;
 
     /**
      * @param string $domain
      *
      * @return CookieInterface
      */
-    public function setDomain($domain);
+    public function withDomain($domain): CookieInterface;
 
     /**
      * @return string
      */
-    public function getDomain();
+    public function getDomain(): string;
 
     /**
      * @param bool $secure
      *
      * @return CookieInterface
      */
-    public function setSecure($secure);
+    public function withSecure(bool $secure): CookieInterface;
 
     /**
      * @return bool
      */
-    public function isSecure();
+    public function isSecure(): bool;
 
     /**
      * @param bool $httpOnly
      *
      * @return CookieInterface
      */
-    public function setHttpOnly($httpOnly);
+    public function withHttpOnly($httpOnly): CookieInterface;
 
     /**
      * @return bool
      */
-    public function isHttpOnly();
+    public function isHttpOnly(): bool;
 
     /**
      * @return CookieInterface

@@ -8,9 +8,11 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Cookie;
+namespace Vainyl\Http;
+
+use Vainyl\Time\TimeInterface;
 
 /**
  * Class Cookie
@@ -36,18 +38,18 @@ class Cookie implements CookieInterface
     /**
      * AbstractCookie constructor.
      *
-     * @param string             $name
-     * @param string             $value
-     * @param \DateTimeInterface $expiryDate
-     * @param string             $path
-     * @param string             $domain
-     * @param bool               $secure
-     * @param bool               $httpOnly
+     * @param string        $name
+     * @param string        $value
+     * @param TimeInterface $expiryDate
+     * @param string        $path
+     * @param string        $domain
+     * @param bool          $secure
+     * @param bool          $httpOnly
      */
     public function __construct(
         $name,
         $value,
-        \DateTimeInterface $expiryDate = null,
+        TimeInterface $expiryDate = null,
         $path = '/',
         $domain = null,
         $secure = false,
@@ -65,7 +67,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -73,17 +75,18 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setName($name)
+    public function withName(string $name): CookieInterface
     {
-        $this->name = $name;
+        $copy = clone $this;
+        $copy->name = $name;
 
-        return $this;
+        return $copy;
     }
 
     /**
      * @inheritDoc
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -91,17 +94,18 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setValue($value)
+    public function withValue(string $value): CookieInterface
     {
-        $this->value = $value;
+        $copy = clone $this;
+        $copy->value = $value;
 
-        return $this;
+        return $copy;
     }
 
     /**
      * @inheritDoc
      */
-    public function getExpiryDate()
+    public function getExpiryDate(): TimeInterface
     {
         return $this->expiryDate;
     }
@@ -109,17 +113,18 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setExpiryDate(\DateTimeInterface $expiryDate)
+    public function withExpiryDate(TimeInterface $expiryDate): CookieInterface
     {
-        $this->expiryDate = $expiryDate;
+        $copy = clone $this;
+        $copy->expiryDate = $expiryDate;
 
-        return $this;
+        return $copy;
     }
 
     /**
      * @inheritDoc
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -127,17 +132,18 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setPath($path)
+    public function withPath($path): CookieInterface
     {
-        $this->path = $path;
+        $copy = clone $this;
+        $copy->path = $path;
 
-        return $this;
+        return $copy;
     }
 
     /**
      * @inheritDoc
      */
-    public function getDomain()
+    public function getDomain(): string
     {
         return $this->domain;
     }
@@ -145,17 +151,18 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setDomain($domain)
+    public function withDomain($domain): CookieInterface
     {
-        $this->domain = $domain;
+        $copy = clone $this;
+        $copy->domain = $domain;
 
-        return $this;
+        return $copy;
     }
 
     /**
      * @inheritDoc
      */
-    public function isSecure()
+    public function isSecure(): bool
     {
         return $this->secure;
     }
@@ -163,17 +170,18 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setSecure($secure)
+    public function withSecure(bool $secure): CookieInterface
     {
-        $this->secure = $secure;
+        $copy = clone $this;
+        $copy->secure = $secure;
 
-        return $this;
+        return $copy;
     }
 
     /**
      * @inheritDoc
      */
-    public function isHttpOnly()
+    public function isHttpOnly(): bool
     {
         return $this->httpOnly;
     }
@@ -181,11 +189,12 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setHttpOnly($httpOnly)
+    public function withHttpOnly($httpOnly): CookieInterface
     {
-        $this->httpOnly = $httpOnly;
+        $copy = clone $this;
+        $copy->httpOnly = $httpOnly;
 
-        return $this;
+        return $copy;
     }
 
     /**

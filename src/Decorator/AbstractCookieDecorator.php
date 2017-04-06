@@ -8,11 +8,12 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Cookie\Decorator;
+namespace Vainyl\Http\Decorator;
 
-use Vainyl\Http\Cookie\CookieInterface;
+use Vainyl\Http\CookieInterface;
+use Vainyl\Time\TimeInterface;
 
 /**
  * Class AbstractCookieDecorator
@@ -36,9 +37,9 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setName($name)
+    public function withName(string $name): CookieInterface
     {
-        $this->cookie->setName($name);
+        $this->cookie = $this->cookie->withName($name);
 
         return $this;
     }
@@ -46,7 +47,7 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->cookie->getName();
     }
@@ -54,9 +55,9 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setValue($value)
+    public function withValue(string $value): CookieInterface
     {
-        $this->cookie->setValue($value);
+        $this->cookie = $this->cookie->withValue($value);
 
         return $this;
     }
@@ -64,7 +65,7 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getValue()
+    public function getValue(): string
     {
         return $this->cookie->getValue();
     }
@@ -72,9 +73,9 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setExpiryDate(\DateTimeInterface $expiryDate)
+    public function withExpiryDate(TimeInterface $expiryDate): CookieInterface
     {
-        $this->cookie->setExpiryDate($expiryDate);
+        $this->cookie = $this->cookie->withExpiryDate($expiryDate);
 
         return $this;
     }
@@ -82,7 +83,7 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getExpiryDate()
+    public function getExpiryDate(): TimeInterface
     {
         return $this->cookie->getExpiryDate();
     }
@@ -90,9 +91,9 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setPath($path)
+    public function withPath($path): CookieInterface
     {
-        $this->cookie->setPath($path);
+        $this->cookie = $this->cookie->withPath($path);
 
         return $this;
     }
@@ -100,7 +101,7 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->cookie->getPath();
     }
@@ -108,9 +109,9 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setDomain($domain)
+    public function withDomain($domain): CookieInterface
     {
-        $this->cookie->setDomain($domain);
+        $this->cookie = $this->cookie->withDomain($domain);
 
         return $this;
     }
@@ -118,7 +119,7 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getDomain()
+    public function getDomain(): string
     {
         return $this->cookie->getDomain();
     }
@@ -126,9 +127,9 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setSecure($secure)
+    public function withSecure(bool $secure): CookieInterface
     {
-        $this->cookie->setSecure($secure);
+        $this->cookie = $this->cookie->withSecure($secure);
 
         return $this;
     }
@@ -136,7 +137,7 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function isSecure()
+    public function isSecure(): bool
     {
         return $this->cookie->isSecure();
     }
@@ -144,9 +145,9 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function setHttpOnly($httpOnly)
+    public function withHttpOnly($httpOnly): CookieInterface
     {
-        $this->cookie->setHttpOnly($httpOnly);
+        $this->cookie = $this->cookie->withHttpOnly($httpOnly);
 
         return $this;
     }
@@ -154,8 +155,18 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function isHttpOnly()
+    public function isHttpOnly(): bool
     {
         return $this->cookie->isHttpOnly();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function send()
+    {
+        $this->cookie->send();
+
+        return $this;
     }
 }
