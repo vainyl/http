@@ -8,28 +8,31 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Stream;
+namespace Vainyl\Http;
 
-use Vain\Core\Exception\NonSeekableStreamException;
-use Vain\Core\Exception\ReadErrorException;
-use Vain\Core\Exception\ResourceUnavailableException;
-use Vain\Core\Exception\SeekErrorException;
-use Vain\Core\Exception\TellErrorException;
-use Vain\Core\Exception\WriteErrorException;
+use Psr\Http\Message\StreamInterface;
+use Vainyl\Http\Exception\CannotReadException;
+use Vainyl\Http\Exception\CannotSeekException;
+use Vainyl\Http\Exception\CannotWriteException;
+use Vainyl\Http\Exception\CursorUnavailableException;
+use Vainyl\Http\Exception\NonReadableStreamException;
+use Vainyl\Http\Exception\NonSeekableStreamException;
+use Vainyl\Http\Exception\NonWritableStreamException;
+use Vainyl\Http\Exception\StreamUnavailableException;
 
 /**
- * Class AbstractStream
+ * Class ResourceStream
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractStream implements VainStreamInterface
+class ResourceStream implements StreamInterface
 {
     private $resource;
 
     /**
-     * AbstractStream constructor.
+     * ResourceStream constructor.
      *
      * @param resource $resource
      */
@@ -41,7 +44,7 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         if (false === $this->isReadable()) {
             return '';
@@ -54,7 +57,7 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function close() : VainStreamInterface
+    public function close(): StreamInterface
     {
         fclose($this->resource);
 
@@ -88,13 +91,13 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function tell() : int
+    public function tell(): int
     {
         if (null === $this->resource) {
-            throw new ResourceUnavailableException($this);
+            throw new StreamUnavailableException($this);
         }
         if (false === ($result = ftell($this->resource))) {
-            throw new TellErrorException($this);
+            throw new CursorUnavailableException($this);
         }
 
         return $result;
@@ -103,7 +106,7 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function eof() : bool
+    public function eof(): bool
     {
         if (null === $this->resource) {
             return true;
@@ -115,7 +118,7 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function isSeekable() : bool
+    public function isSeekable(): bool
     {
         if (null === $this->resource) {
             return false;
@@ -128,16 +131,16 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function seek($offset, $whence = SEEK_SET) : bool
+    public function seek($offset, $whence = SEEK_SET): bool
     {
         if (null === $this->resource) {
-            throw new ResourceUnavailableException($this);
+            throw new StreamUnavailableException($this);
         }
         if (false === $this->isSeekable()) {
             throw new NonSeekableStreamException($this);
         }
         if (0 !== ($result = fseek($this->resource, $offset, $whence))) {
-            throw new SeekErrorException($this);
+            throw new CannotSeekException($this, $offset);
         }
 
         return true;
@@ -146,7 +149,7 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function rewind() : bool
+    public function rewind(): bool
     {
         return $this->seek(0);
     }
@@ -154,7 +157,7 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function isWritable() : bool
+    public function isWritable(): bool
     {
         if (null === $this->resource) {
             return false;
@@ -174,16 +177,16 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function write($string) : int
+    public function write($string): int
     {
         if (null === $this->resource) {
-            throw new ResourceUnavailableException($this);
+            throw new StreamUnavailableException($this);
         }
         if (false === $this->isWritable()) {
-            throw new WriteErrorException($this);
+            throw new NonWritableStreamException($this);
         }
         if (false === ($result = fwrite($this->resource, $string))) {
-            throw new WriteErrorException($this);
+            throw new CannotWriteException($this, $string);
         }
 
         return $result;
@@ -192,7 +195,7 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function isReadable() : bool
+    public function isReadable(): bool
     {
         if (null === $this->resource) {
             return false;
@@ -206,16 +209,16 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function read($length) : string
+    public function read($length): string
     {
         if (null === $this->resource) {
-            throw new ResourceUnavailableException($this);
+            throw new StreamUnavailableException($this);
         }
         if (false === $this->isReadable()) {
-            throw new ReadErrorException($this);
+            throw new NonReadableStreamException($this);
         }
         if (false === ($result = fread($this->resource, $length))) {
-            throw new ReadErrorException($this);
+            throw new CannotReadException($this, $length);
         }
 
         return $result;
@@ -224,13 +227,13 @@ abstract class AbstractStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function getContents() : string
+    public function getContents(): string
     {
         if (false === $this->isReadable()) {
-            throw new ReadErrorException($this);
+            throw new NonReadableStreamException($this);
         }
         if (false === ($result = stream_get_contents($this->resource))) {
-            throw new ReadErrorException($this);
+            throw new NonReadableStreamException($this);
         }
 
         return $result;
@@ -250,13 +253,5 @@ abstract class AbstractStream implements VainStreamInterface
         }
 
         return $metadata[$key];
-    }
-
-    /**
-     * @return resource
-     */
-    public function getResource() : resource
-    {
-        return $this->resource;
     }
 }

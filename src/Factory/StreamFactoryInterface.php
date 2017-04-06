@@ -8,9 +8,9 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Stream\Factory;
+namespace Vainyl\Http\Factory;
 
 use Psr\Http\Message\StreamInterface;
 
@@ -27,5 +27,5 @@ interface StreamFactoryInterface
      *
      * @return StreamInterface
      */
-    public function createStream(string $source, string $mode) : StreamInterface;
+    public function createStream(string $source, string $mode): StreamInterface;
 }

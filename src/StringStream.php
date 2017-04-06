@@ -8,16 +8,18 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Stream;
+namespace Vainyl\Http;
+
+use Psr\Http\Message\StreamInterface;
 
 /**
  * Class StringStream
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class StringStream implements VainStreamInterface
+class StringStream implements StreamInterface
 {
     private $string;
 
@@ -36,7 +38,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->string;
     }
@@ -44,7 +46,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function close() : VainStreamInterface
+    public function close(): StreamInterface
     {
         return $this;
     }
@@ -52,7 +54,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function detach() : VainStreamInterface
+    public function detach(): StreamInterface
     {
         return $this;
     }
@@ -60,7 +62,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function getSize() : int
+    public function getSize(): int
     {
         return strlen($this->string);
     }
@@ -68,7 +70,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function tell() : int
+    public function tell(): int
     {
         return $this->currentPosition;
     }
@@ -76,7 +78,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function eof() : bool
+    public function eof(): bool
     {
         return ($this->currentPosition > $this->getSize() - 1);
     }
@@ -84,7 +86,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function isSeekable() : bool
+    public function isSeekable(): bool
     {
         return true;
     }
@@ -92,7 +94,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function seek($offset, $whence = SEEK_SET) : VainStreamInterface
+    public function seek($offset, $whence = SEEK_SET): StreamInterface
     {
         switch ($whence) {
             case SEEK_SET:
@@ -109,7 +111,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function rewind() : VainStreamInterface
+    public function rewind(): StreamInterface
     {
         $this->currentPosition = 0;
 
@@ -119,7 +121,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function isWritable() : bool
+    public function isWritable(): bool
     {
         return false;
     }
@@ -127,7 +129,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function write($string) : VainStreamInterface
+    public function write($string): StreamInterface
     {
         $this->string = $string;
 
@@ -137,7 +139,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function isReadable() : bool
+    public function isReadable(): bool
     {
         return true;
     }
@@ -145,7 +147,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function read($length) : string
+    public function read($length): string
     {
         return substr($this->string, $this->currentPosition, $length);
     }
@@ -153,7 +155,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function getContents() : string
+    public function getContents(): string
     {
         return $this->string;
     }
@@ -169,7 +171,7 @@ class StringStream implements VainStreamInterface
     /**
      * @inheritDoc
      */
-    public function getResource() : resource
+    public function getResource(): resource
     {
         return null;
     }
