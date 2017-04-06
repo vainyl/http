@@ -8,22 +8,21 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Request;
+namespace Vainyl\Http;
 
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
-use Vainyl\Http\Header\Storage\HeaderStorageInterface;
-use Vainyl\Http\Message\AbstractMessage;
-use Vainyl\Http\Stream\VainStreamInterface;
-use Vainyl\Http\Uri\VainUriInterface;
+use Vainyl\Http\Factory\HeaderFactoryInterface;
 
 /**
- * Class AbstractRequest
+ * Class Request
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractRequest extends AbstractMessage implements VainRequestInterface
+class Request extends AbstractMessage implements RequestInterface
 {
     private $method;
 
@@ -33,25 +32,27 @@ abstract class AbstractRequest extends AbstractMessage implements VainRequestInt
      * AbstractRequest constructor.
      *
      * @param string                 $method
-     * @param VainUriInterface       $uri
-     * @param VainStreamInterface    $stream
-     * @param HeaderStorageInterface $headerStorage
+     * @param UriInterface           $uri
+     * @param HeaderFactoryInterface $headerFactory
+     * @param StreamInterface        $stream
+     * @param \ArrayAccess           $headerStorage
      */
     public function __construct(
+        HeaderFactoryInterface $headerFactory,
+        \ArrayAccess $headerStorage,
         string $method,
-        VainUriInterface $uri,
-        VainStreamInterface $stream,
-        HeaderStorageInterface $headerStorage
+        UriInterface $uri,
+        StreamInterface $stream
     ) {
         $this->method = $method;
         $this->uri = $uri;
-        parent::__construct($stream, $headerStorage);
+        parent::__construct($headerFactory, $headerStorage, $stream);
     }
 
     /**
      * @inheritDoc
      */
-    public function getRequestTarget() : string
+    public function getRequestTarget(): string
     {
         return $this->uri->getPath();
     }
@@ -59,7 +60,7 @@ abstract class AbstractRequest extends AbstractMessage implements VainRequestInt
     /**
      * @inheritDoc
      */
-    public function withRequestTarget($requestTarget) : VainRequestInterface
+    public function withRequestTarget($requestTarget): RequestInterface
     {
         $copy = clone $this;
         $copy->uri = $this->uri->withPath($requestTarget);
@@ -70,7 +71,7 @@ abstract class AbstractRequest extends AbstractMessage implements VainRequestInt
     /**
      * @inheritDoc
      */
-    public function getMethod() : string
+    public function getMethod(): string
     {
         return $this->method;
     }
@@ -78,7 +79,7 @@ abstract class AbstractRequest extends AbstractMessage implements VainRequestInt
     /**
      * @inheritDoc
      */
-    public function withMethod($method) : VainRequestInterface
+    public function withMethod($method): RequestInterface
     {
         $copy = clone $this;
         $copy->method = $method;
@@ -87,9 +88,9 @@ abstract class AbstractRequest extends AbstractMessage implements VainRequestInt
     }
 
     /**
-     * @return VainUriInterface
+     * @return UriInterface
      */
-    public function getUri() : VainUriInterface
+    public function getUri(): UriInterface
     {
         return $this->uri;
     }
@@ -97,7 +98,7 @@ abstract class AbstractRequest extends AbstractMessage implements VainRequestInt
     /**
      * @inheritDoc
      */
-    public function withUri(UriInterface $uri, $preserveHost = false) : VainRequestInterface
+    public function withUri(UriInterface $uri, $preserveHost = false): RequestInterface
     {
         $copy = clone $this;
         $copy->uri = $uri;
@@ -111,7 +112,7 @@ abstract class AbstractRequest extends AbstractMessage implements VainRequestInt
     /**
      * @inheritDoc
      */
-    public function getContents() : string
+    public function getContents(): string
     {
         $this->getBody()->rewind();
 

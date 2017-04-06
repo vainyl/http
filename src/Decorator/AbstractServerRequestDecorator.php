@@ -10,7 +10,7 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Request\Decorator;
+namespace Vainyl\Http\Decorator;
 
 use Psr\Http\Message\ServerRequestInterface;
 

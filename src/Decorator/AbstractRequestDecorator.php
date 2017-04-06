@@ -10,11 +10,10 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Request\Decorator;
+namespace Vainyl\Http\Decorator;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
-use Vainyl\Http\Message\Decorator\AbstractMessageDecorator;
 
 /**
  * Class AbstractRequestDecorator
@@ -91,5 +90,4 @@ abstract class AbstractRequestDecorator extends AbstractMessageDecorator impleme
 
         return $copy;
     }
-
 }

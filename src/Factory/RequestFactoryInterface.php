@@ -8,13 +8,13 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Request\Factory;
+namespace Vainyl\Http\Factory;
 
-use Vainyl\Http\Request\VainServerRequestInterface;
-use Vainyl\Http\Stream\VainStreamInterface;
-use Vainyl\Http\Uri\VainUriInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Interface RequestFactoryInterface
@@ -33,24 +33,24 @@ interface RequestFactoryInterface
     const PARSE_URL_FRAGMENT = 'fragment';
 
     /**
-     * @return VainServerRequestInterface
+     * @return ServerRequestInterface
      */
     public function createFromGlobals();
 
     /**
-     * @param array               $serverParams
-     * @param array               $uploadedFiles
-     * @param array               $queryParams
-     * @param array               $attributes
-     * @param array               $parsedBody
-     * @param string              $protocol
-     * @param string              $method
-     * @param VainUriInterface    $uri
-     * @param VainStreamInterface $stream
-     * @param array               $cookies
-     * @param array               $headers
+     * @param array           $serverParams
+     * @param array           $uploadedFiles
+     * @param array           $queryParams
+     * @param array           $attributes
+     * @param array           $parsedBody
+     * @param string          $protocol
+     * @param string          $method
+     * @param UriInterface    $uri
+     * @param StreamInterface $stream
+     * @param array           $cookies
+     * @param array           $headers
      *
-     * @return VainServerRequestInterface
+     * @return ServerRequestInterface
      */
     public function createRequest(
         array $serverParams,
@@ -60,9 +60,9 @@ interface RequestFactoryInterface
         array $parsedBody,
         string $protocol,
         string $method,
-        VainUriInterface $uri,
-        VainStreamInterface $stream,
+        UriInterface $uri,
+        StreamInterface $stream,
         array $cookies,
         array $headers
-    ) : VainServerRequestInterface;
+    ): ServerRequestInterface;
 }
