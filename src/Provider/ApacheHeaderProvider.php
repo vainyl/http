@@ -10,24 +10,32 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Header\Provider\Apache;
+namespace Vainyl\Http\Provider;
 
-use Vainyl\Http\Header\Provider\AbstractHeaderProvider;
+use Vainyl\Core\Id\AbstractIdentifiable;
 
 /**
  * Class ApacheHeaderProvider
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class ApacheHeaderProvider extends AbstractHeaderProvider
+class ApacheHeaderProvider extends AbstractIdentifiable implements HeaderProviderInterface
 {
     /**
      * @inheritDoc
      */
-    public function getHeaders(array $data) : array
+    public function getName(): string
+    {
+        return 'apache';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getHeaders(array $data) : ?array
     {
         if (false === function_exists('getallheaders')) {
-            return $this->getNext()->getHeaders($data);
+            return null;
         }
 
         return getallheaders();

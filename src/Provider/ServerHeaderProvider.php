@@ -8,23 +8,31 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Header\Provider\Server;
+namespace Vainyl\Http\Provider;
 
-use Vainyl\Http\Header\Provider\HeaderProviderInterface;
+use Vainyl\Core\Id\AbstractIdentifiable;
 
 /**
  * Class ServerHeaderProvider
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class ServerHeaderProvider implements HeaderProviderInterface
+class ServerHeaderProvider extends AbstractIdentifiable implements HeaderProviderInterface
 {
     /**
      * @inheritDoc
      */
-    public function getHeaders(array $data) : array
+    public function getName(): string
+    {
+        return 'server';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getHeaders(array $data): array
     {
         $headers = [];
         foreach ($data as $name => $value) {

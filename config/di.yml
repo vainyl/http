@@ -1,0 +1,18 @@
+services:
+  header.provider.apache:
+    class: Vainyl\Http\Provider\ApacheHeaderProvider
+    tags:
+      - {name: header.provider, priority: 100}
+  header.provider.server:
+    class: Vainyl\Http\Provider\ServerHeaderProvider
+    tags:
+      - {name: header.provider, priority: 200}
+  header.provider.chain:
+    class: Vainyl\Http\Chain\HeaderProviderChain
+  header.provider: '@header.provider.chain'
+  header.storage:
+    parent: storage.proxy
+    class: Vainyl\Http\Storage\HeaderStorage
+  cookie.storage:
+    parent: storage.proxy
+    class: Vainyl\Http\Storage\CookieStorage

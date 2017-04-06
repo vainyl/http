@@ -10,9 +10,9 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Header\Factory;
+namespace Vainyl\Http\Factory;
 
-use Vainyl\Http\Header\VainHeaderInterface;
+use Vainyl\Http\HeaderInterface;
 
 /**
  * Interface HeaderFactoryInterface
@@ -25,7 +25,7 @@ interface HeaderFactoryInterface
      * @param string $name
      * @param mixed  $values
      *
-     * @return VainHeaderInterface
+     * @return HeaderInterface
      */
-    public function createHeader(string $name, $values) : VainHeaderInterface;
+    public function createHeader(string $name, $values) : HeaderInterface;
 }

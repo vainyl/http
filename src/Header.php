@@ -8,16 +8,18 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Header;
+namespace Vainyl\Http;
+
+use Vainyl\Core\Id\AbstractIdentifiable;
 
 /**
- * Class AbstractHeader
+ * Class Header
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractHeader implements VainHeaderInterface
+class Header extends AbstractIdentifiable implements HeaderInterface
 {
     private $name;
 
@@ -38,7 +40,7 @@ abstract class AbstractHeader implements VainHeaderInterface
     /**
      * @inheritDoc
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -46,17 +48,18 @@ abstract class AbstractHeader implements VainHeaderInterface
     /**
      * @inheritDoc
      */
-    public function setName(string $name) : VainHeaderInterface
+    public function withName(string $name): HeaderInterface
     {
-        $this->name = $name;
+        $copy = clone $this;
+        $copy->name = $name;
 
-        return $this;
+        return $copy;
     }
 
     /**
      * @inheritDoc
      */
-    public function getValues() : array
+    public function getValues(): array
     {
         return $this->values;
     }
@@ -64,27 +67,29 @@ abstract class AbstractHeader implements VainHeaderInterface
     /**
      * @inheritDoc
      */
-    public function setValues(array $values) : VainHeaderInterface
+    public function withValues(array $values): HeaderInterface
     {
-        $this->values = $values;
+        $copy = clone $this;
+        $copy->values = $values;
 
-        return $this;
+        return $copy;
     }
 
     /**
      * @inheritDoc
      */
-    public function addValue($value) : VainHeaderInterface
+    public function withAddedValue($value): HeaderInterface
     {
-        $this->values = $value;
+        $copy = clone $this;
+        $copy->values[] = $value;
 
-        return $this;
+        return $copy;
     }
 
     /**
      * @inheritDoc
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return sprintf('%s: %s', $this->getName(), implode(', ', $this->getValues()));
     }
