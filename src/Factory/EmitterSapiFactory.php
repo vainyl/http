@@ -8,12 +8,12 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Response\Emitter\Factory;
+namespace Vainyl\Http\Factory;
 
-use Vainyl\Http\Response\Emitter\EmitterInterface;
-use Vainyl\Http\Response\Emitter\Sapi\SapiEmitter;
+use Vainyl\Http\EmitterInterface;
+use Vainyl\Http\SapiEmitter;
 
 /**
  * Class EmitterSapiFactory

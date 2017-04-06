@@ -8,12 +8,12 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Response\Emitter\Decorator;
+namespace Vainyl\Http\Decorator;
 
-use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
-use Vainyl\Http\Response\Emitter\EmitterInterface;
+use Psr\Http\Message\ResponseInterface;
+use Vainyl\Http\EmitterInterface;
 
 /**
  * Class AbstractEmitterDecorator
@@ -37,7 +37,7 @@ abstract class AbstractEmitterDecorator implements EmitterInterface
     /**
      * @inheritDoc
      */
-    public function send(HttpResponseInterface $response): EmitterInterface
+    public function send(ResponseInterface $response): EmitterInterface
     {
         $this->emitter->send($response);
 

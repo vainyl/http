@@ -8,12 +8,12 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Response\Emitter\Factory\Decorator;
+namespace Vainyl\Http\Decorator;
 
-use Vainyl\Http\Response\Emitter\EmitterInterface;
-use Vainyl\Http\Response\Emitter\Factory\EmitterFactoryInterface;
+use Vainyl\Http\EmitterInterface;
+use Vainyl\Http\Factory\EmitterFactoryInterface;
 
 /**
  * Class AbstractEmitterFactoryDecorator

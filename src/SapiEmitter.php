@@ -10,10 +10,9 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Response\Emitter\Sapi;
+namespace Vainyl\Http;
 
-use Vainyl\Http\Response\Emitter\EmitterInterface;
-use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class SapiEmitter
@@ -43,7 +42,7 @@ class SapiEmitter implements EmitterInterface
     /**
      * @inheritDoc
      */
-    public function send(HttpResponseInterface $response): EmitterInterface
+    public function send(ResponseInterface $response): EmitterInterface
     {
         if (headers_sent()) {
             return $this;

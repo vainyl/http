@@ -8,26 +8,25 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Response\Emitter\Factory\Decorator;
+namespace Vainyl\Http\Decorator;
 
 use Psr\Log\LoggerInterface;
-use Vainyl\Http\Response\Emitter\Decorator\EmitterLoggerDecorator;
-use Vainyl\Http\Response\Emitter\EmitterInterface;
-use Vainyl\Http\Response\Emitter\Factory\EmitterFactoryInterface;
+use Vainyl\Http\EmitterInterface;
+use Vainyl\Http\Factory\EmitterFactoryInterface;
 
 /**
- * Class EmitterFactoryLoggerDecorator
+ * Class LoggerEmitterFactoryDecorator
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class EmitterFactoryLoggerDecorator extends AbstractEmitterFactoryDecorator
+class LoggerEmitterFactoryDecorator extends AbstractEmitterFactoryDecorator
 {
     private $logger;
 
     /**
-     * EmitterFactoryLoggerDecorator constructor.
+     * LoggerEmitterFactoryDecorator constructor.
      *
      * @param EmitterFactoryInterface $emitterFactory
      * @param LoggerInterface         $logger
@@ -43,6 +42,6 @@ class EmitterFactoryLoggerDecorator extends AbstractEmitterFactoryDecorator
      */
     public function createEmitter(): EmitterInterface
     {
-        return new EmitterLoggerDecorator(parent::createEmitter(), $this->logger);
+        return new LoggerEmitterDecorator(parent::createEmitter(), $this->logger);
     }
 }

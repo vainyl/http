@@ -23,3 +23,9 @@ services:
     class: Vainyl\Http\Proxy\RequestStack
   response.stack:
     class: Vainyl\Http\Proxy\ResponseStack
+  emitter.factory.sapi:
+    class: Vainyl\Http\Factory\EmitterSapiFactory
+  emitter.factory.logger:
+    decorates: emitter.factory
+    class: Vainyl\Http\Decorator\LoggerEmitterFactoryDecorator
+    arguments: ['@emitter.factory.logger.inner', '@logger']

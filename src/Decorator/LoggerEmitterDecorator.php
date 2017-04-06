@@ -8,25 +8,25 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Response\Emitter\Decorator;
+namespace Vainyl\Http\Decorator;
 
-use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
-use Vainyl\Http\Response\Emitter\EmitterInterface;
+use Vainyl\Http\EmitterInterface;
 
 /**
- * Class EmitterLoggerDecorator
+ * Class LoggerEmitterDecorator
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class EmitterLoggerDecorator extends AbstractEmitterDecorator
+class LoggerEmitterDecorator extends AbstractEmitterDecorator
 {
     private $logger;
 
     /**
-     * EmitterLoggerDecorator constructor.
+     * LoggerEmitterDecorator constructor.
      *
      * @param EmitterInterface $emitter
      * @param LoggerInterface  $logger
@@ -40,9 +40,9 @@ class EmitterLoggerDecorator extends AbstractEmitterDecorator
     /**
      * @inheritDoc
      */
-    public function send(HttpResponseInterface $response): EmitterInterface
+    public function send(ResponseInterface $response): EmitterInterface
     {
-        $this->logger->debug(sprintf('Sending response %s', implode(PHP_EOL, $response->toDisplay())));
+        $this->logger->debug(sprintf('Sending response %s', implode(PHP_EOL, $response->toArray())));
         parent::send($response);
         $this->logger->debug('Response sent');
 

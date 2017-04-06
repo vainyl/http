@@ -10,19 +10,21 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Response\Emitter\Factory;
+namespace Vainyl\Http;
 
-use Vainyl\Http\Response\Emitter\EmitterInterface;
+use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 
 /**
  * Interface EmitterInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface EmitterFactoryInterface
+interface EmitterInterface
 {
     /**
+     * @param HttpResponseInterface $response
+     *
      * @return EmitterInterface
      */
-    public function createEmitter() : EmitterInterface;
+    public function send(HttpResponseInterface $response) : EmitterInterface;
 }

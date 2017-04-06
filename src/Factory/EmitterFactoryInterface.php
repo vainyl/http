@@ -8,23 +8,21 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Response\Emitter;
+namespace Vainyl\Http\Factory;
 
-use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
+use Vainyl\Http\EmitterInterface;
 
 /**
  * Interface EmitterInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface EmitterInterface
+interface EmitterFactoryInterface
 {
     /**
-     * @param HttpResponseInterface $response
-     *
      * @return EmitterInterface
      */
-    public function send(HttpResponseInterface $response) : EmitterInterface;
+    public function createEmitter(): EmitterInterface;
 }
