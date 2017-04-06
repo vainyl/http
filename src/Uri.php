@@ -8,17 +8,22 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Uri;
+namespace Vainyl\Http;
+
+use Psr\Http\Message\UriInterface;
 
 /**
- * Class AbstractUri
+ * Class Uri
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractUri implements VainUriInterface
+class Uri implements UriInterface
 {
+
+    const STANDARD_PORTS = ['http' => 80, 'https' => 443];
+
     private $scheme;
 
     private $user;
@@ -70,7 +75,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function getScheme() : string
+    public function getScheme(): string
     {
         return $this->scheme;
     }
@@ -78,7 +83,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function getAuthority() : string
+    public function getAuthority(): string
     {
         $authority = $this->host;
         if (null !== ($userInfo = $this->getUserInfo())) {
@@ -94,7 +99,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function getUserInfo() : string
+    public function getUserInfo(): string
     {
         if (null === $this->user) {
             return '';
@@ -109,7 +114,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function getHost() : string
+    public function getHost(): string
     {
         return $this->host;
     }
@@ -117,7 +122,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function getPort() : int
+    public function getPort(): int
     {
         return $this->port;
     }
@@ -125,7 +130,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function getPath() : string
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -133,7 +138,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function getQuery() : string
+    public function getQuery(): string
     {
         return $this->query;
     }
@@ -141,7 +146,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function getFragment() : string
+    public function getFragment(): string
     {
         return $this->fragment;
     }
@@ -149,7 +154,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function withScheme($scheme) : VainUriInterface
+    public function withScheme($scheme): UriInterface
     {
         $copy = clone $this;
         $copy->scheme = $scheme;
@@ -160,7 +165,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function withUserInfo($user, $password = null) : VainUriInterface
+    public function withUserInfo($user, $password = null): UriInterface
     {
         $copy = clone $this;
         $copy->user = $user;
@@ -172,7 +177,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function withHost($host) : VainUriInterface
+    public function withHost($host): UriInterface
     {
         $copy = clone $this;
         $copy->host = $host;
@@ -183,7 +188,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function withPort($port) : VainUriInterface
+    public function withPort($port): UriInterface
     {
         $copy = clone $this;
         $copy->port = $port;
@@ -194,7 +199,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function withPath($path) : VainUriInterface
+    public function withPath($path): UriInterface
     {
         $copy = clone $this;
         $copy->path = $path;
@@ -205,7 +210,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function withQuery($query) : VainUriInterface
+    public function withQuery($query): UriInterface
     {
         $copy = clone $this;
         $copy->query = $query;
@@ -216,7 +221,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function withFragment($fragment) : VainUriInterface
+    public function withFragment($fragment): UriInterface
     {
         $copy = clone $this;
         $copy->fragment = $fragment;
@@ -227,7 +232,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         $uri = '';
         if (null !== $this->scheme) {
@@ -247,7 +252,7 @@ abstract class AbstractUri implements VainUriInterface
     /**
      * @inheritDoc
      */
-    public function isStandardPort() : bool
+    public function isStandardPort(): bool
     {
         if (null === $this->scheme) {
             return false;
@@ -260,21 +265,5 @@ abstract class AbstractUri implements VainUriInterface
         }
 
         return ($this->port === self::STANDARD_PORTS[$this->scheme]);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUser() : string
-    {
-        return $this->user;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getPassword() : string
-    {
-        return $this->password;
     }
 }

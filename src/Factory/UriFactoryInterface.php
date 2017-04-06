@@ -10,9 +10,9 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Uri\Factory;
+namespace Vainyl\Http\Factory;
 
-use Vainyl\Http\Uri\VainUriInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Interface UriFactoryInterface
@@ -24,7 +24,7 @@ interface UriFactoryInterface
     /**
      * @param string $uri
      *
-     * @return VainUriInterface
+     * @return UriInterface
      */
-    public function createUri(string $uri) : VainUriInterface;
+    public function createUri(string $uri) : UriInterface;
 }
