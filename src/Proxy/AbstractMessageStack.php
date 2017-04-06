@@ -8,62 +8,37 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Message\Proxy;
+namespace Vainyl\Http\Proxy;
 
+use Ds\Stack;
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
-use Vainyl\Http\Header\Storage\HeaderStorageInterface;
-use Vainyl\Http\Message\VainMessageInterface;
-use Vainyl\Http\Stream\VainStreamInterface;
 
 /**
- * Class AbstractMessageProxy
+ * Class AbstractMessageStack
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractMessageProxy implements HttpMessageProxyInterface
+abstract class AbstractMessageStack implements MessageProxyInterface
 {
-    private $messageStack;
+    private $stack;
 
     /**
-     * AbstractMessageProxy constructor.
+     * MessageStack constructor.
      */
     public function __construct()
     {
-        $this->messageStack = new \SplStack();
+        $this->stack = new Stack();
     }
 
     /**
      * @inheritDoc
      */
-    public function getHeaderStorage() : HeaderStorageInterface
+    public function addMessage(MessageInterface $message)
     {
-        return $this->getCurrentMessage()->getHeaderStorage();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getStream() : VainStreamInterface
-    {
-        return $this->getCurrentMessage()->getStream();
-    }
-
-    /**
-     * @return \SplStack
-     */
-    public function getMessageStack()
-    {
-        return $this->messageStack;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function addMessage(VainMessageInterface $message)
-    {
-        $this->messageStack->push($message);
+        $this->stack->push($message);
 
         return $this;
     }
@@ -73,7 +48,7 @@ abstract class AbstractMessageProxy implements HttpMessageProxyInterface
      */
     public function popMessage()
     {
-        return $this->messageStack->pop();
+        return $this->stack->pop();
     }
 
     /**
@@ -81,7 +56,7 @@ abstract class AbstractMessageProxy implements HttpMessageProxyInterface
      */
     public function getCurrentMessage()
     {
-        return $this->messageStack->top();
+        return $this->stack->peek();
     }
 
     /**
@@ -185,24 +160,5 @@ abstract class AbstractMessageProxy implements HttpMessageProxyInterface
         $this->addMessage($message);
 
         return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withContentType(string $contentType) : VainMessageInterface
-    {
-        $message = $this->popMessage()->withContentType($contentType);
-        $this->addMessage($message);
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toDisplay(): array
-    {
-        return $this->getCurrentMessage()->toDisplay();
     }
 }

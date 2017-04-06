@@ -10,7 +10,7 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Message\Decorator;
+namespace Vainyl\Http\Decorator;
 
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
@@ -35,14 +35,6 @@ abstract class AbstractMessageDecorator implements MessageInterface
     }
 
     /**
-     * @return MessageInterface
-     */
-    public function getMessage(): MessageInterface
-    {
-        return $this->message;
-    }
-
-    /**
      * @inheritDoc
      */
     public function getProtocolVersion()
@@ -53,10 +45,10 @@ abstract class AbstractMessageDecorator implements MessageInterface
     /**
      * @inheritDoc
      */
-    public function withProtocolVersion($version)
+    public function withProtocolVersion($protocol)
     {
         $copy = clone $this;
-        $copy->message = $this->message->withProtocolVersion($version);
+        $copy->message = $this->message->withProtocolVersion($protocol);
 
         return $copy;
     }
