@@ -13,6 +13,13 @@ services:
   header.storage:
     parent: storage.proxy
     class: Vainyl\Http\Storage\HeaderStorage
+  file.storage:
+    parent: storage.proxy
+    class: Vainyl\Http\Storage\FileStorage
   cookie.storage:
     parent: storage.proxy
     class: Vainyl\Http\Storage\CookieStorage
+  request.stack:
+    class: Vainyl\Http\Proxy\RequestStack
+  response.stack:
+    class: Vainyl\Http\Proxy\ResponseStack
