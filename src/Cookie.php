@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http;
 
+use Vainyl\Core\Id\AbstractIdentifiable;
 use Vainyl\Time\TimeInterface;
 
 /**
@@ -19,7 +20,7 @@ use Vainyl\Time\TimeInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class Cookie implements CookieInterface
+class Cookie extends AbstractIdentifiable implements CookieInterface
 {
     private $name;
 
