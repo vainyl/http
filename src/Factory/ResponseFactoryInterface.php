@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace Vainyl\Http\Factory;
 
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 
 /**
  * Interface ResponseFactoryInterface
@@ -23,15 +22,17 @@ use Psr\Http\Message\StreamInterface;
 interface ResponseFactoryInterface
 {
     /**
-     * @param int             $statusCode
-     * @param StreamInterface $stream
-     * @param \ArrayAccess    $headers
+     * @param string $destinationStream
+     * @param int    $statusCode
+     * @param array  $headersData
+     * @param string $content
      *
      * @return ResponseInterface
      */
     public function createResponse(
-        int $statusCode,
-        StreamInterface $stream,
-        \ArrayAccess $headers
+        string $destinationStream,
+        int $statusCode = 200,
+        array $headersData = [],
+        string $content = ''
     ): ResponseInterface;
 }
