@@ -10,10 +10,9 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Response\Decorator;
+namespace Vainyl\Http\Decorator;
 
 use Psr\Http\Message\ResponseInterface;
-use Vainyl\Http\Message\Decorator\AbstractMessageDecorator;
 
 /**
  * Class AbstractResponseDecorator

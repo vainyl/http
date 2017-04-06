@@ -8,11 +8,11 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Response\Factory;
+namespace Vainyl\Http\Factory;
 
-use Vainyl\Http\Response\VainResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Interface ResponseFactoryInterface
@@ -27,12 +27,12 @@ interface ResponseFactoryInterface
      * @param array  $headersData
      * @param string $content
      *
-     * @return VainResponseInterface
+     * @return ResponseInterface
      */
     public function createResponse(
         string $destinationStream,
         int $statusCode = 200,
         array $headersData = [],
         string $content = ''
-    ) : VainResponseInterface;
+    ): ResponseInterface;
 }

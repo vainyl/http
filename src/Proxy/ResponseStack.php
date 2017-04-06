@@ -8,26 +8,25 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\Response\Proxy;
+namespace Vainyl\Http\Proxy;
 
-use Vainyl\Http\Message\Proxy\AbstractMessageProxy;
-use Vainyl\Http\Response\VainResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class AbstractResponseProxy
+ * Class ResponseStack
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  *
- * @method VainResponseInterface getCurrentMessage
+ * @method ResponseInterface getCurrentMessage
  */
-abstract class AbstractResponseProxy extends AbstractMessageProxy implements HttpResponseProxyInterface
+abstract class ResponseStack extends AbstractMessageStack implements ResponseProxyInterface
 {
     /**
      * @inheritDoc
      */
-    public function addResponse(VainResponseInterface $vainResponse)
+    public function addResponse(ResponseInterface $vainResponse)
     {
         return $this->addMessage($vainResponse);
     }
