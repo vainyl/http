@@ -37,14 +37,6 @@ abstract class AbstractCookieDecorator implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getId(): string
-    {
-        return $this->cookie->getId();
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function withName(string $name): CookieInterface
     {
         $this->cookie = $this->cookie->withName($name);
@@ -166,5 +158,15 @@ abstract class AbstractCookieDecorator implements CookieInterface
     public function isHttpOnly(): bool
     {
         return $this->cookie->isHttpOnly();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function send()
+    {
+        $this->cookie->send();
+
+        return $this;
     }
 }
