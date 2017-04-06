@@ -21,6 +21,7 @@ use Psr\Http\Message\UriInterface;
  */
 class Uri implements UriInterface
 {
+
     const STANDARD_PORTS = ['http' => 80, 'https' => 443];
 
     private $scheme;
