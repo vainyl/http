@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Provider;
 
-use Vainyl\Core\NameableInterface;
+use Vainyl\Core\Name\NameableInterface;
 
 /**
  * Interface HeaderProviderInterface

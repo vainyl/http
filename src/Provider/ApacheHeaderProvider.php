@@ -8,11 +8,11 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Vainyl\Http\Provider;
 
-use Vainyl\Core\AbstractIdentifiable;
+use Vainyl\Core\Id\AbstractIdentifiable;
 
 /**
  * Class ApacheHeaderProvider
@@ -32,7 +32,7 @@ class ApacheHeaderProvider extends AbstractIdentifiable implements HeaderProvide
     /**
      * @inheritDoc
      */
-    public function getHeaders(array $data): ?array
+    public function getHeaders(array $data) : ?array
     {
         if (false === function_exists('getallheaders')) {
             return null;
