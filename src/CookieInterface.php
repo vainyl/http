@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http;
 
+use Vainyl\Core\Name\NameableInterface;
 use Vainyl\Time\TimeInterface;
 
 /**
@@ -19,7 +20,7 @@ use Vainyl\Time\TimeInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface CookieInterface
+interface CookieInterface extends NameableInterface
 {
     /**
      * @param string $name
@@ -27,11 +28,6 @@ interface CookieInterface
      * @return CookieInterface
      */
     public function withName(string $name): CookieInterface;
-
-    /**
-     * @return string
-     */
-    public function getName(): string;
 
     /**
      * @param string $value
