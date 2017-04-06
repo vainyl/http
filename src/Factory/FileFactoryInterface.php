@@ -8,9 +8,9 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\File\Factory;
+namespace Vainyl\Http\Factory;
 
 use Psr\Http\Message\UploadedFileInterface;
 
@@ -36,5 +36,5 @@ interface FileFactoryInterface
         int $error,
         string $fileName,
         string $mediaType
-    ) : UploadedFileInterface;
+    ): UploadedFileInterface;
 }

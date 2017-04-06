@@ -8,20 +8,20 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Vainyl\Http\File;
+namespace Vainyl\Http;
 
 use Psr\Http\Message\StreamInterface;
-use Vain\Core\Exception\MoveErrorException;
-use Vainyl\Http\Stream\VainStreamInterface;
+use Vainyl\Http\Exception\CannotMoveFileException;
+use Psr\Http\Message\UploadedFileInterface;
 
 /**
- * Class AbstractFile
+ * Class UploadedFile
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class AbstractFile implements VainFileInterface
+class UploadedFile implements UploadedFileInterface
 {
     const BUFFER_SIZE = 4096;
 
@@ -38,13 +38,13 @@ class AbstractFile implements VainFileInterface
     /**
      * AbstractFile constructor.
      *
-     * @param VainStreamInterface $stream
-     * @param int                 $size
-     * @param int                 $error
-     * @param string              $filename
-     * @param string              $mediaType
+     * @param StreamInterface $stream
+     * @param int             $size
+     * @param int             $error
+     * @param string          $filename
+     * @param string          $mediaType
      */
-    public function __construct(VainStreamInterface $stream, int $size, int $error, string $filename, string $mediaType)
+    public function __construct(StreamInterface $stream, int $size, int $error, string $filename, string $mediaType)
     {
         $this->stream = $stream;
         $this->size = $size;
@@ -56,7 +56,7 @@ class AbstractFile implements VainFileInterface
     /**
      * @inheritDoc
      */
-    public function getStream() : StreamInterface
+    public function getStream(): StreamInterface
     {
         return $this->stream;
     }
@@ -69,7 +69,7 @@ class AbstractFile implements VainFileInterface
         switch (true) {
             case (null === PHP_SAPI || 0 === strpos(PHP_SAPI, 'cli')):
                 if (false === ($handle = fopen($targetPath, 'wb+'))) {
-                    throw new MoveErrorException($this, $targetPath);
+                    throw new CannotMoveFileException($this, $targetPath);
                 }
                 $stream = $this->getStream();
                 $stream->rewind();
@@ -80,7 +80,7 @@ class AbstractFile implements VainFileInterface
                 break;
             default:
                 if (false === move_uploaded_file($this->stream, $targetPath)) {
-                    throw new MoveErrorException($this, $targetPath);
+                    throw new CannotMoveFileException($this, $targetPath);
                 }
         }
         $this->stream = null;
@@ -89,7 +89,7 @@ class AbstractFile implements VainFileInterface
     /**
      * @inheritDoc
      */
-    public function getSize() : int
+    public function getSize(): int
     {
         return $this->size;
     }
@@ -97,7 +97,7 @@ class AbstractFile implements VainFileInterface
     /**
      * @inheritDoc
      */
-    public function getError() : int
+    public function getError(): int
     {
         return $this->error;
     }
@@ -105,7 +105,7 @@ class AbstractFile implements VainFileInterface
     /**
      * @inheritDoc
      */
-    public function getClientFilename() : string
+    public function getClientFilename(): string
     {
         return $this->filename;
     }
@@ -113,7 +113,7 @@ class AbstractFile implements VainFileInterface
     /**
      * @inheritDoc
      */
-    public function getClientMediaType() : string
+    public function getClientMediaType(): string
     {
         return $this->mediaType;
     }
