@@ -21,14 +21,14 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @method ResponseInterface getCurrentMessage
  */
-class ResponseStack extends AbstractMessageStack implements ResponseProxyInterface
+abstract class ResponseStack extends AbstractMessageStack implements ResponseProxyInterface
 {
     /**
      * @inheritDoc
      */
-    public function addResponse(ResponseInterface $response)
+    public function addResponse(ResponseInterface $vainResponse)
     {
-        return $this->addMessage($response);
+        return $this->addMessage($vainResponse);
     }
 
     /**
