@@ -8,7 +8,7 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Vainyl\Http\Factory;
 
@@ -26,5 +26,5 @@ interface UriFactoryInterface
      *
      * @return UriInterface
      */
-    public function createUri(string $uri) : UriInterface;
+    public function createUri(string $uri): UriInterface;
 }
