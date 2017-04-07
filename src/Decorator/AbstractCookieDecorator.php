@@ -167,14 +167,4 @@ abstract class AbstractCookieDecorator implements CookieInterface
     {
         return $this->cookie->isHttpOnly();
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function send()
-    {
-        $this->cookie->send();
-
-        return $this;
-    }
 }
