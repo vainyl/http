@@ -14,7 +14,7 @@ namespace Vainyl\Http\Chain;
 
 use Ds\PriorityQueue;
 use Ds\Vector;
-use Vainyl\Core\Id\AbstractIdentifiable;
+use Vainyl\Core\AbstractIdentifiable;
 use Vainyl\Http\Exception\CannotExtractHeadersException;
 use Vainyl\Http\Provider\HeaderProviderInterface;
 

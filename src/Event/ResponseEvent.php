@@ -29,6 +29,7 @@ class ResponseEvent extends AbstractIdentifiable implements ResponseEventInterfa
     /**
      * ResponseEvent constructor.
      *
+     * @param string            $name
      * @param ResponseInterface $response
      */
     public function __construct(string $name, ResponseInterface $response)

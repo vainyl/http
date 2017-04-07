@@ -12,8 +12,8 @@ declare(strict_types = 1);
 
 namespace Vainyl\Http;
 
-use Vainyl\Core\Name\NameableInterface;
-use Vainyl\Core\String\StringInterface;
+use Vainyl\Core\NameableInterface;
+use Vainyl\Core\StringInterface;
 
 /**
  * Interface HeaderInterface

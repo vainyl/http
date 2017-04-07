@@ -14,7 +14,7 @@ namespace Vainyl\Http;
 
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
-use Vainyl\Core\Id\AbstractIdentifiable;
+use Vainyl\Core\AbstractIdentifiable;
 use Vainyl\Http\Exception\UnsupportedProtocolException;
 use Vainyl\Http\Factory\HeaderFactoryInterface;
 
