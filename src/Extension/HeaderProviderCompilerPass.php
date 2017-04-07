@@ -44,5 +44,4 @@ class HeaderProviderCompilerPass implements CompilerPassInterface
             }
         }
     }
-
 }

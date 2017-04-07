@@ -24,5 +24,5 @@ interface StreamExceptionInterface extends \Throwable
     /**
      * @return StreamInterface
      */
-    public function getStream() : StreamInterface;
+    public function getStream(): StreamInterface;
 }

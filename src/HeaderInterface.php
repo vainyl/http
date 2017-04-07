@@ -8,7 +8,7 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Vainyl\Http;
 
@@ -27,24 +27,24 @@ interface HeaderInterface extends NameableInterface, StringInterface
      *
      * @return HeaderInterface
      */
-    public function withName(string $name) : HeaderInterface;
+    public function withName(string $name): HeaderInterface;
 
     /**
      * @param array $values
      *
      * @return HeaderInterface
      */
-    public function withValues(array $values) : HeaderInterface;
+    public function withValues(array $values): HeaderInterface;
 
     /**
      * @return array
      */
-    public function getValues() : array;
+    public function getValues(): array;
 
     /**
      * @param string $value
      *
      * @return HeaderInterface
      */
-    public function withAddedValue($value) : HeaderInterface;
+    public function withAddedValue($value): HeaderInterface;
 }

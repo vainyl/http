@@ -8,7 +8,7 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Vainyl\Http\Event;
 
@@ -25,5 +25,5 @@ interface RequestEventInterface extends EventInterface
     /**
      * @return ServerRequestInterface
      */
-    public function getRequest() : ServerRequestInterface;
+    public function getRequest(): ServerRequestInterface;
 }

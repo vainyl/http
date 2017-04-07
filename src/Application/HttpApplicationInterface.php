@@ -28,5 +28,5 @@ interface HttpApplicationInterface extends ApplicationInterface
      *
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request) : ResponseInterface;
+    public function handle(ServerRequestInterface $request): ResponseInterface;
 }

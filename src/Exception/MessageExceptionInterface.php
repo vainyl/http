@@ -24,5 +24,5 @@ interface MessageExceptionInterface extends \Throwable
     /**
      * @return MessageInterface
      */
-    public function getHttpMessage() : MessageInterface;
+    public function getHttpMessage(): MessageInterface;
 }

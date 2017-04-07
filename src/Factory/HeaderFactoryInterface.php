@@ -8,7 +8,7 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Vainyl\Http\Factory;
 
@@ -27,5 +27,5 @@ interface HeaderFactoryInterface
      *
      * @return HeaderInterface
      */
-    public function createHeader(string $name, $values) : HeaderInterface;
+    public function createHeader(string $name, $values): HeaderInterface;
 }

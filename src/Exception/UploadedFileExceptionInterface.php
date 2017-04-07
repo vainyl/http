@@ -24,5 +24,5 @@ interface UploadedFileExceptionInterface extends \Throwable
     /**
      * @return UploadedFileInterface
      */
-    public function getFile() : UploadedFileInterface;
+    public function getFile(): UploadedFileInterface;
 }

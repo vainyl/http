@@ -24,5 +24,5 @@ interface HeaderProviderExceptionInterface extends \Throwable
     /**
      * @return HeaderProviderInterface
      */
-    public function getProvider() : HeaderProviderInterface;
+    public function getProvider(): HeaderProviderInterface;
 }

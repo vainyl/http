@@ -21,5 +21,4 @@ use Psr\Http\Message\MessageInterface;
  */
 interface MessageProxyInterface extends MessageInterface
 {
-
 }
