@@ -16,7 +16,7 @@ use Vainyl\Core\Name\NameableInterface;
 use Vainyl\Time\TimeInterface;
 
 /**
- * Interface VainCookieInterface
+ * Interface CookieInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
