@@ -26,9 +26,9 @@ class ResponseStack extends AbstractMessageStack implements ResponseProxyInterfa
     /**
      * @inheritDoc
      */
-    public function addResponse(ResponseInterface $vainResponse)
+    public function addResponse(ResponseInterface $response)
     {
-        return $this->addMessage($vainResponse);
+        return $this->addMessage($response);
     }
 
     /**
