@@ -12,8 +12,8 @@ declare(strict_types = 1);
 
 namespace Vainyl\Http\Event;
 
-use Vain\Core\Event\EventInterface;
-use Vainyl\Http\Request\VainServerRequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Vainyl\Event\EventInterface;
 
 /**
  * Class RequestEvent
@@ -23,7 +23,7 @@ use Vainyl\Http\Request\VainServerRequestInterface;
 interface RequestEventInterface extends EventInterface
 {
     /**
-     * @return VainServerRequestInterface
+     * @return ServerRequestInterface
      */
-    public function getRequest() : VainServerRequestInterface;
+    public function getRequest() : ServerRequestInterface;
 }

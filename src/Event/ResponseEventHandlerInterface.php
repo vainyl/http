@@ -10,10 +10,9 @@
  */
 declare(strict_types = 1);
 
-namespace Vainyl\Http\Event\Handler;
+namespace Vainyl\Http\Event;
 
-use Vain\Core\Event\Handler\EventHandlerInterface;
-use Vainyl\Http\Event\ResponseEventInterface;
+use Vainyl\Event\EventHandlerInterface;
 
 /**
  * Interface ResponseEventHandlerInterface

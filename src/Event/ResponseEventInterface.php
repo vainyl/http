@@ -12,8 +12,8 @@ declare(strict_types = 1);
 
 namespace Vainyl\Http\Event;
 
-use Vain\Core\Event\EventInterface;
-use Vainyl\Http\Response\VainResponseInterface;
+use Psr\Http\Message\ResponseInterface;
+use Vainyl\Event\EventInterface;
 
 /**
  * Interface ResponseEventInterface
@@ -23,7 +23,7 @@ use Vainyl\Http\Response\VainResponseInterface;
 interface ResponseEventInterface extends EventInterface
 {
     /**
-     * @return VainResponseInterface
+     * @return ResponseInterface
      */
-    public function getResponse() : VainResponseInterface;
+    public function getResponse() : ResponseInterface;
 }
