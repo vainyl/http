@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http;
 
-use Vainyl\Core\Id\AbstractIdentifiable;
+use Vainyl\Core\AbstractIdentifiable;
 use Vainyl\Time\TimeInterface;
 
 /**
@@ -196,23 +196,5 @@ class Cookie extends AbstractIdentifiable implements CookieInterface
         $copy->httpOnly = $httpOnly;
 
         return $copy;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function send()
-    {
-        setcookie(
-            $this->getName(),
-            $this->getValue(),
-            $this->getExpiryDate()->getTimestamp(),
-            $this->getPath(),
-            $this->getDomain(),
-            $this->isSecure(),
-            $this->isHttpOnly()
-        );
-
-        return $this;
     }
 }
