@@ -22,6 +22,8 @@ use Vainyl\Core\AbstractIdentifiable;
  */
 class ResponseEvent extends AbstractIdentifiable implements ResponseEventInterface
 {
+    private $name;
+
     private $response;
 
     /**
@@ -29,8 +31,9 @@ class ResponseEvent extends AbstractIdentifiable implements ResponseEventInterfa
      *
      * @param ResponseInterface $response
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(string $name, ResponseInterface $response)
     {
+        $this->name = $name;
         $this->response = $response;
     }
 
@@ -39,7 +42,7 @@ class ResponseEvent extends AbstractIdentifiable implements ResponseEventInterfa
      */
     public function getName(): string
     {
-        return 'response';
+        return $this->name;
     }
 
     /**

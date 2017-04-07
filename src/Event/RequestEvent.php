@@ -22,15 +22,19 @@ use Vainyl\Core\AbstractIdentifiable;
  */
 class RequestEvent extends AbstractIdentifiable implements RequestEventInterface
 {
+    private $name;
+
     private $request;
 
     /**
      * RequestEvent constructor.
      *
+     * @param string                 $name
      * @param ServerRequestInterface $request
      */
-    public function __construct(ServerRequestInterface $request)
+    public function __construct(string $name, ServerRequestInterface $request)
     {
+        $this->name = $name;
         $this->request = $request;
     }
 
@@ -39,7 +43,7 @@ class RequestEvent extends AbstractIdentifiable implements RequestEventInterface
      */
     public function getName(): string
     {
-        return 'request';
+        return $this->name;
     }
 
     /**

@@ -12,17 +12,8 @@ services:
   header.provider.chain:
     class: Vainyl\Http\Chain\HeaderProviderChain
   header.provider: '@header.provider.chain'
-  header.storage:
-    parent: storage.proxy
-    class: Vainyl\Http\Storage\HeaderStorage
-  file.storage:
-    parent: storage.proxy
-    class: Vainyl\Http\Storage\FileStorage
   cookie.factory:
     class: Vainyl\Http\Factory\CookieFactory
-  cookie.storage:
-    parent: storage.proxy
-    class: Vainyl\Http\Storage\CookieStorage
   request.stack:
     class: Vainyl\Http\Proxy\RequestStack
   response.stack:
