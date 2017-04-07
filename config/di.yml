@@ -1,4 +1,6 @@
 services:
+  header.factory:
+    class: Vainyl\Http\Factory\HeaderFactory
   header.provider.apache:
     class: Vainyl\Http\Provider\ApacheHeaderProvider
     tags:
@@ -16,6 +18,8 @@ services:
   file.storage:
     parent: storage.proxy
     class: Vainyl\Http\Storage\FileStorage
+  cookie.factory:
+    class: Vainyl\Http\Factory\CookieFactory
   cookie.storage:
     parent: storage.proxy
     class: Vainyl\Http\Storage\CookieStorage

@@ -38,31 +38,33 @@ interface RequestFactoryInterface
     public function createFromGlobals();
 
     /**
+     * @param \ArrayAccess    $headers
+     * @param string          $method
+     * @param UriInterface    $uri
+     * @param StreamInterface $stream
+     * @param \ArrayAccess    $cookies
+     * @param \ArrayAccess    $files
      * @param array           $serverParams
      * @param array           $uploadedFiles
      * @param array           $queryParams
      * @param array           $attributes
      * @param array           $parsedBody
      * @param string          $protocol
-     * @param string          $method
-     * @param UriInterface    $uri
-     * @param StreamInterface $stream
-     * @param array           $cookies
-     * @param array           $headers
      *
      * @return ServerRequestInterface
      */
     public function createRequest(
+        \ArrayAccess $headers,
+        string $method,
+        UriInterface $uri,
+        StreamInterface $stream,
+        \ArrayAccess $cookies,
+        \ArrayAccess $files,
         array $serverParams,
         array $uploadedFiles,
         array $queryParams,
         array $attributes,
         array $parsedBody,
-        string $protocol,
-        string $method,
-        UriInterface $uri,
-        StreamInterface $stream,
-        array $cookies,
-        array $headers
+        string $protocol
     ): ServerRequestInterface;
 }
