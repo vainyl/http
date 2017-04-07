@@ -100,9 +100,4 @@ interface CookieInterface extends NameableInterface
      * @return bool
      */
     public function isHttpOnly(): bool;
-
-    /**
-     * @return CookieInterface
-     */
-    public function send();
 }
