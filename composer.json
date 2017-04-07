@@ -14,7 +14,10 @@
     },
     "require": {
         "php": ">=7.0",
-        "vainyl/core": "dev-master"
+        "psr/http-message": "^1",
+        "vainyl/core": "0.1.x-dev",
+        "vainyl/event": "0.1.x-dev",
+        "vainyl/time": "0.1.x-dev"
     },
     "config": {
         "secure-http": false

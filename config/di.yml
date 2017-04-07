@@ -1,0 +1,26 @@
+services:
+  header.factory:
+    class: Vainyl\Http\Factory\HeaderFactory
+  header.provider.apache:
+    class: Vainyl\Http\Provider\ApacheHeaderProvider
+    tags:
+      - {name: header.provider, priority: 100}
+  header.provider.server:
+    class: Vainyl\Http\Provider\ServerHeaderProvider
+    tags:
+      - {name: header.provider, priority: 200}
+  header.provider.chain:
+    class: Vainyl\Http\Chain\HeaderProviderChain
+  header.provider: '@header.provider.chain'
+  cookie.factory:
+    class: Vainyl\Http\Factory\CookieFactory
+  request.stack:
+    class: Vainyl\Http\Proxy\RequestStack
+  response.stack:
+    class: Vainyl\Http\Proxy\ResponseStack
+  emitter.factory.sapi:
+    class: Vainyl\Http\Factory\EmitterSapiFactory
+  emitter.factory.logger:
+    decorates: emitter.factory
+    class: Vainyl\Http\Decorator\LoggerEmitterFactoryDecorator
+    arguments: ['@emitter.factory.logger.inner', '@logger']
