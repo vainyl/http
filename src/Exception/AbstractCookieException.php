@@ -20,7 +20,7 @@ use Vainyl\Http\CookieInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class AbstractCookieException extends AbstractCoreException implements CookieExceptionInterface
+abstract class AbstractCookieException extends AbstractCoreException implements CookieExceptionInterface
 {
     private $cookie;
 
