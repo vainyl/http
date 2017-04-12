@@ -89,7 +89,7 @@ abstract class AbstractMessageStack implements MessageProxyInterface
     /**
      * @inheritDoc
      */
-    public function hasHeader($name) : bool
+    public function hasHeader($name): bool
     {
         return $this->getCurrentMessage()->hasHeader($name);
     }
@@ -105,7 +105,7 @@ abstract class AbstractMessageStack implements MessageProxyInterface
     /**
      * @inheritDoc
      */
-    public function getHeaderLine($name) : string
+    public function getHeaderLine($name): string
     {
         return $this->getCurrentMessage()->getHeaderLine($name);
     }

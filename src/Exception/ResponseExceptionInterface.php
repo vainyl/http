@@ -24,5 +24,5 @@ interface ResponseExceptionInterface extends \Throwable
     /**
      * @return ResponseInterface
      */
-    public function getResponse() :  ResponseInterface;
+    public function getResponse(): ResponseInterface;
 }

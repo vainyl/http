@@ -8,7 +8,7 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Vainyl\Http;
 
@@ -26,5 +26,5 @@ interface EmitterInterface
      *
      * @return EmitterInterface
      */
-    public function send(HttpResponseInterface $response) : EmitterInterface;
+    public function send(HttpResponseInterface $response): EmitterInterface;
 }

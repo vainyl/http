@@ -8,15 +8,14 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Vainyl\Http\Event\Handler;
 
-use Vain\Core\Event\Handler\AbstractEventHandler;
-use Vain\Core\Event\Resolver\EventResolverInterface;
+use Psr\Log\LoggerInterface;
+use Vainyl\Event\AbstractEventHandler;
 use Vainyl\Http\Event\RequestEventInterface;
 use Vainyl\Http\Event\ResponseEventInterface;
-use Vain\Logger\LoggerInterface;
 
 /**
  * Class HttpEventHandler
@@ -34,21 +33,19 @@ class HttpEventHandler extends AbstractEventHandler implements
     /**
      * DynamicLogger constructor.
      *
-     * @param EventResolverInterface $resolver
-     * @param LoggerInterface   $logger
-     * @param string            $logHeader
+     * @param LoggerInterface        $logger
+     * @param string                 $logHeader
      */
-    public function __construct(EventResolverInterface $resolver, LoggerInterface $logger, string $logHeader)
+    public function __construct(LoggerInterface $logger, string $logHeader)
     {
         $this->logger = $logger;
         $this->logHeader = $logHeader;
-        parent::__construct($resolver);
     }
 
     /**
      * @inheritDoc
      */
-    public function request(RequestEventInterface $event) : RequestEventHandlerInterface
+    public function request(RequestEventInterface $event): RequestEventHandlerInterface
     {
         $request = $event->getRequest();
         if (false === $request->hasHeader($this->logHeader)) {
@@ -62,7 +59,7 @@ class HttpEventHandler extends AbstractEventHandler implements
     /**
      * @inheritDoc
      */
-    public function response(ResponseEventInterface $event) : ResponseEventHandlerInterface
+    public function response(ResponseEventInterface $event): ResponseEventHandlerInterface
     {
         $this->logger->restoreLevel();
 

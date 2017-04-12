@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http;
 
-use Vainyl\Core\Id\AbstractIdentifiable;
+use Vainyl\Core\AbstractIdentifiable;
 
 /**
  * Class Header
