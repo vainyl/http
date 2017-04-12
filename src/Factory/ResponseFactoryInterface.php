@@ -22,17 +22,9 @@ use Psr\Http\Message\ResponseInterface;
 interface ResponseFactoryInterface
 {
     /**
-     * @param string $destinationStream
-     * @param int    $statusCode
-     * @param array  $headersData
-     * @param string $content
+     * @param int $statusCode
      *
      * @return ResponseInterface
      */
-    public function createResponse(
-        string $destinationStream,
-        int $statusCode = 200,
-        array $headersData = [],
-        string $content = ''
-    ): ResponseInterface;
+    public function createResponse(int $statusCode = 200): ResponseInterface;
 }

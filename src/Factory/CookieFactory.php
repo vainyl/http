@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Factory;
 
+use Vainyl\Core\AbstractIdentifiable;
 use Vainyl\Http\Cookie;
 use Vainyl\Http\CookieInterface;
 use Vainyl\Time\TimeInterface;
@@ -21,8 +22,31 @@ use Vainyl\Time\TimeInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class CookieFactory implements CookieFactoryInterface
+class CookieFactory extends AbstractIdentifiable implements CookieFactoryInterface
 {
+    private $cookieStorage;
+
+    /**
+     * CookieFactory constructor.
+     *
+     * @param \ArrayAccess $cookieStorage
+     */
+    public function __construct(\ArrayAccess $cookieStorage)
+    {
+        $this->cookieStorage = $cookieStorage;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function create(array $cookies): \ArrayAccess
+    {
+        $cookieStorage = clone $this->cookieStorage;
+        foreach ($cookies as $cookieName => $cookieValue) {
+            $cookieStorage->offsetSet($cookieName, $this->createCookie($cookieName, $cookieValue));
+        }
+    }
+
     /**
      * @inheritDoc
      */
