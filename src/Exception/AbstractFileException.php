@@ -20,7 +20,7 @@ use Vainyl\Core\Exception\AbstractCoreException;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractUploadedFileException extends AbstractCoreException implements UploadedFileExceptionInterface
+abstract class AbstractFileException extends AbstractCoreException implements FileExceptionInterface
 {
     private $file;
 

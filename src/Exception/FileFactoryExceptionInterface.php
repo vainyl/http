@@ -12,17 +12,17 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Exception;
 
-use Psr\Http\Message\UploadedFileInterface;
+use Vainyl\Http\Factory\FileFactoryInterface;
 
 /**
- * Interface UploadedFileExceptionInterface
+ * Interface FileFactoryExceptionInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface UploadedFileExceptionInterface extends \Throwable
+interface FileFactoryExceptionInterface extends \Throwable
 {
     /**
-     * @return UploadedFileInterface
+     * @return FileFactoryInterface
      */
-    public function getFile(): UploadedFileInterface;
+    public function getFileFactory() : FileFactoryInterface;
 }
