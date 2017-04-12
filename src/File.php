@@ -21,7 +21,7 @@ use Vainyl\Http\Exception\CannotMoveFileException;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class UploadedFile implements UploadedFileInterface
+class File implements UploadedFileInterface
 {
     const BUFFER_SIZE = 4096;
 
