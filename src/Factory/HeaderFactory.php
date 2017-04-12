@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Factory;
 
+use Vainyl\Core\AbstractIdentifiable;
 use Vainyl\Http\Header;
 use Vainyl\Http\HeaderInterface;
 
@@ -20,7 +21,7 @@ use Vainyl\Http\HeaderInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class HeaderFactory implements HeaderFactoryInterface
+class HeaderFactory extends AbstractIdentifiable implements HeaderFactoryInterface
 {
     /**
      * @inheritDoc

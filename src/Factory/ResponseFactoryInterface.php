@@ -13,13 +13,14 @@ declare(strict_types=1);
 namespace Vainyl\Http\Factory;
 
 use Psr\Http\Message\ResponseInterface;
+use Vainyl\Core\IdentifiableInterface;
 
 /**
  * Interface ResponseFactoryInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface ResponseFactoryInterface
+interface ResponseFactoryInterface extends IdentifiableInterface
 {
     /**
      * @param int $statusCode
