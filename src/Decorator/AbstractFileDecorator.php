@@ -19,7 +19,7 @@ use Psr\Http\Message\UploadedFileInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class AbstractFileDecorator implements UploadedFileInterface
+abstract class AbstractFileDecorator implements UploadedFileInterface
 {
     private $file;
 
