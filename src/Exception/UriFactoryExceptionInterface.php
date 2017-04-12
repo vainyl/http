@@ -12,17 +12,17 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Exception;
 
-use Psr\Http\Message\ResponseInterface;
+use Vainyl\Http\Factory\UriFactoryInterface;
 
 /**
- * Interface ResponseExceptionInterface
+ * Interface UriFactoryExceptionInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface ResponseExceptionInterface extends \Throwable
+interface UriFactoryExceptionInterface extends \Throwable
 {
     /**
-     * @return ResponseInterface
+     * @return UriFactoryInterface
      */
-    public function getResponse(): ResponseInterface;
+    public function getUriFactory() : UriFactoryInterface;
 }

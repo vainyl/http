@@ -10,30 +10,37 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Factory;
+namespace Vainyl\Http\Decorator;
 
-use Vainyl\Core\AbstractIdentifiable;
-use Vainyl\Http\Cookie;
 use Vainyl\Http\CookieInterface;
+use Vainyl\Http\Factory\CookieFactoryInterface;
 use Vainyl\Time\TimeInterface;
 
 /**
- * Class CookieFactory
+ * Class AbstractCookieFactoryDecorator
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class CookieFactory extends AbstractIdentifiable implements CookieFactoryInterface
+abstract class AbstractCookieFactoryDecorator implements CookieFactoryInterface
 {
-    private $cookieStorage;
+    private $cookieFactory;
 
     /**
-     * CookieFactory constructor.
+     * AbstractCookieFactoryDecorator constructor.
      *
-     * @param \ArrayAccess $cookieStorage
+     * @param CookieFactoryInterface $cookieFactory
      */
-    public function __construct(\ArrayAccess $cookieStorage)
+    public function __construct(CookieFactoryInterface $cookieFactory)
     {
-        $this->cookieStorage = $cookieStorage;
+        $this->cookieFactory = $cookieFactory;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getId(): string
+    {
+        return $this->cookieFactory->getId();
     }
 
     /**
@@ -41,10 +48,7 @@ class CookieFactory extends AbstractIdentifiable implements CookieFactoryInterfa
      */
     public function create(array $cookies): \ArrayAccess
     {
-        $cookieStorage = clone $this->cookieStorage;
-        foreach ($cookies as $cookieName => $cookieValue) {
-            $cookieStorage->offsetSet($cookieName, $this->createCookie($cookieName, $cookieValue));
-        }
+        return $this->cookieFactory->create($cookies);
     }
 
     /**
@@ -59,6 +63,6 @@ class CookieFactory extends AbstractIdentifiable implements CookieFactoryInterfa
         bool $secure = false,
         bool $httpOnly = false
     ): CookieInterface {
-        return new Cookie($name, $value, $expiryDate, $path, $domain, $secure, $httpOnly);
+        return $this->cookieFactory->createCookie($name, $value, $expiryDate, $path, $domain, $secure, $httpOnly);
     }
 }

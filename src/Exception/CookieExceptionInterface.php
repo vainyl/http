@@ -24,5 +24,5 @@ interface CookieExceptionInterface extends \Throwable
     /**
      * @return CookieInterface
      */
-    public function getCookie() : CookieInterface;
+    public function getCookie(): CookieInterface;
 }

@@ -13,15 +13,15 @@ declare(strict_types=1);
 namespace Vainyl\Http;
 
 use Psr\Http\Message\StreamInterface;
-use Vainyl\Http\Exception\CannotMoveFileException;
 use Psr\Http\Message\UploadedFileInterface;
+use Vainyl\Http\Exception\CannotMoveFileException;
 
 /**
  * Class UploadedFile
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class UploadedFile implements UploadedFileInterface
+class File implements UploadedFileInterface
 {
     const BUFFER_SIZE = 4096;
 

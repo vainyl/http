@@ -8,11 +8,11 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Vainyl\Http\Event\Handler;
 
-use Vain\Core\Event\Handler\EventHandlerInterface;
+use Vainyl\Event\EventHandlerInterface;
 use Vainyl\Http\Event\RequestEventInterface;
 
 /**
@@ -27,5 +27,5 @@ interface RequestEventHandlerInterface extends EventHandlerInterface
      *
      * @return RequestEventHandlerInterface
      */
-    public function request(RequestEventInterface $event) : RequestEventHandlerInterface;
+    public function request(RequestEventInterface $event): RequestEventHandlerInterface;
 }

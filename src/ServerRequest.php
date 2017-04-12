@@ -39,39 +39,35 @@ class ServerRequest extends Request implements ServerRequestInterface
 
     private $parsedBody;
 
-    private $protocol;
-
     /**
      * ServerRequest constructor.
      *
      * @param HeaderFactoryInterface $headerFactory
+     * @param CookieFactoryInterface $cookieFactory
      * @param \ArrayAccess           $headerStorage
      * @param string                 $method
      * @param UriInterface           $uri
      * @param StreamInterface        $stream
      * @param \ArrayAccess           $cookieStorage
      * @param \ArrayAccess           $fileStorage
-     * @param CookieFactoryInterface $cookieFactory
      * @param array                  $serverParams
      * @param array                  $queryParams
      * @param array                  $attributes
      * @param array                  $parsedBody
-     * @param string                 $protocol
      */
     public function __construct(
         HeaderFactoryInterface $headerFactory,
+        CookieFactoryInterface $cookieFactory,
         \ArrayAccess $headerStorage,
+        \ArrayAccess $cookieStorage,
+        \ArrayAccess $fileStorage,
         string $method,
         UriInterface $uri,
         StreamInterface $stream,
-        \ArrayAccess $cookieStorage,
-        \ArrayAccess $fileStorage,
-        CookieFactoryInterface $cookieFactory,
-        array $serverParams,
-        array $queryParams,
-        array $attributes,
-        array $parsedBody,
-        string $protocol
+        array $serverParams = [],
+        array $queryParams = [],
+        array $attributes = [],
+        array $parsedBody = []
     ) {
         $this->cookieStorage = $cookieStorage;
         $this->uploadedFiles = $fileStorage;
@@ -80,7 +76,6 @@ class ServerRequest extends Request implements ServerRequestInterface
         $this->queryParams = $queryParams;
         $this->parsedBody = $parsedBody;
         $this->attributes = $attributes;
-        $this->protocol = $protocol;
         parent::__construct($headerFactory, $headerStorage, $method, $uri, $stream);
     }
 

@@ -8,10 +8,11 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://vainyl.com
  */
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Vainyl\Http\Factory;
 
+use Vainyl\Core\IdentifiableInterface;
 use Vainyl\Http\HeaderInterface;
 
 /**
@@ -19,7 +20,7 @@ use Vainyl\Http\HeaderInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface HeaderFactoryInterface
+interface HeaderFactoryInterface extends IdentifiableInterface
 {
     /**
      * @param string $name
@@ -27,5 +28,5 @@ interface HeaderFactoryInterface
      *
      * @return HeaderInterface
      */
-    public function createHeader(string $name, $values) : HeaderInterface;
+    public function createHeader(string $name, $values): HeaderInterface;
 }

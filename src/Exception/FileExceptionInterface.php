@@ -12,17 +12,17 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Exception;
 
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UploadedFileInterface;
 
 /**
- * Interface ResponseExceptionInterface
+ * Interface FileExceptionInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface ResponseExceptionInterface extends \Throwable
+interface FileExceptionInterface extends \Throwable
 {
     /**
-     * @return ResponseInterface
+     * @return UploadedFileInterface
      */
-    public function getResponse(): ResponseInterface;
+    public function getFile(): UploadedFileInterface;
 }

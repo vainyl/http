@@ -13,15 +13,15 @@ declare(strict_types=1);
 namespace Vainyl\Http;
 
 use Psr\Http\Message\UriInterface;
+use Vainyl\Core\AbstractIdentifiable;
 
 /**
  * Class Uri
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class Uri implements UriInterface
+class Uri extends AbstractIdentifiable implements UriInterface
 {
-
     const STANDARD_PORTS = ['http' => 80, 'https' => 443];
 
     private $scheme;

@@ -13,14 +13,22 @@ declare(strict_types=1);
 namespace Vainyl\Http\Factory;
 
 use Psr\Http\Message\UploadedFileInterface;
+use Vainyl\Core\IdentifiableInterface;
 
 /**
  * Interface FileFactoryInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface FileFactoryInterface
+interface FileFactoryInterface extends IdentifiableInterface
 {
+    /**
+     * @param array $files
+     *
+     * @return \ArrayAccess
+     */
+    public function create(array $files): \ArrayAccess;
+
     /**
      * @param string $source
      * @param int    $size

@@ -19,7 +19,7 @@ use Psr\Http\Message\UploadedFileInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class CannotMoveFileException extends AbstractUploadedFileException
+class CannotMoveFileException extends AbstractFileException
 {
     private $destination;
 

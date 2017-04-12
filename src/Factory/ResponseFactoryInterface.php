@@ -13,26 +13,19 @@ declare(strict_types=1);
 namespace Vainyl\Http\Factory;
 
 use Psr\Http\Message\ResponseInterface;
+use Vainyl\Core\IdentifiableInterface;
 
 /**
  * Interface ResponseFactoryInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface ResponseFactoryInterface
+interface ResponseFactoryInterface extends IdentifiableInterface
 {
     /**
-     * @param string $destinationStream
-     * @param int    $statusCode
-     * @param array  $headersData
-     * @param string $content
+     * @param int $statusCode
      *
      * @return ResponseInterface
      */
-    public function createResponse(
-        string $destinationStream,
-        int $statusCode = 200,
-        array $headersData = [],
-        string $content = ''
-    ): ResponseInterface;
+    public function createResponse(int $statusCode = 200): ResponseInterface;
 }
