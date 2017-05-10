@@ -16,7 +16,7 @@ services:
     parent: storage.proxy
     shared: false
     class: Vainyl\Http\Storage\HeaderStorage
-  file.storage: '@storage'
+  file.storage: '@storage.proxy'
   cookie.storage:
     parent: storage.proxy
     shared: false
