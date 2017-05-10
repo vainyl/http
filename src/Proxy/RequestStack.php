@@ -41,7 +41,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
     }
 
     /**
-     * @inheritDoc
+     * @return ServerRequestInterface
      */
     public function getCurrentRequest(): ServerRequestInterface
     {

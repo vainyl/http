@@ -40,9 +40,9 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponsePro
     }
 
     /**
-     * @inheritDoc
+     * @return ResponseInterface
      */
-    public function getCurrentResponse()
+    public function getCurrentResponse() : ResponseInterface
     {
         return $this->getCurrentMessage();
     }
