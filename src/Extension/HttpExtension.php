@@ -33,6 +33,8 @@ class HttpExtension extends AbstractExtension
     ): AbstractExtension {
         $container->addCompilerPass(new HeaderProviderCompilerPass());
 
+        $container->setAlias('emitter.factory', 'emitter.factory.sapi');
+
         return parent::load($configs, $container, $environment);
     }
 }
