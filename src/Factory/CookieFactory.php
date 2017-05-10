@@ -45,6 +45,8 @@ class CookieFactory extends AbstractIdentifiable implements CookieFactoryInterfa
         foreach ($cookies as $cookieName => $cookieValue) {
             $cookieStorage->offsetSet($cookieName, $this->createCookie($cookieName, $cookieValue));
         }
+
+        return $cookieStorage;
     }
 
     /**
