@@ -21,4 +21,20 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 interface RequestProxyInterface extends ServerRequestInterface
 {
+    /**
+     * @param ServerRequestInterface $request
+     *
+     * @return RequestProxyInterface
+     */
+    public function addRequest(ServerRequestInterface $request): RequestProxyInterface;
+
+    /**
+     * @return ServerRequestInterface
+     */
+    public function popRequest(): ServerRequestInterface;
+
+    /**
+     * @return ServerRequestInterface
+     */
+    public function getCurrentRequest(): ServerRequestInterface;
 }

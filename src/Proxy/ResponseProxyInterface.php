@@ -21,4 +21,20 @@ use Psr\Http\Message\ResponseInterface;
  */
 interface ResponseProxyInterface extends ResponseInterface
 {
+    /**
+     * @param ResponseInterface $vainResponse
+     *
+     * @return ResponseProxyInterface
+     */
+    public function addResponse(ResponseInterface $vainResponse) : ResponseProxyInterface;
+
+    /**
+     * @return ResponseInterface
+     */
+    public function popResponse() : ResponseInterface;
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getCurrentResponse() : ResponseInterface;
 }

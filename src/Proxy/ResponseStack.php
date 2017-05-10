@@ -26,7 +26,7 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponsePro
     /**
      * @inheritDoc
      */
-    public function addResponse(ResponseInterface $vainResponse)
+    public function addResponse(ResponseInterface $vainResponse) : ResponseProxyInterface
     {
         return $this->addMessage($vainResponse);
     }
@@ -34,7 +34,7 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponsePro
     /**
      * @inheritDoc
      */
-    public function popResponse()
+    public function popResponse() : ResponseInterface
     {
         return $this->popMessage();
     }
