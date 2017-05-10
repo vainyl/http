@@ -21,4 +21,20 @@ use Psr\Http\Message\MessageInterface;
  */
 interface MessageProxyInterface extends MessageInterface
 {
+    /**
+     * @param MessageInterface $message
+     *
+     * @return MessageProxyInterface
+     */
+    public function addMessage(MessageInterface $message) : MessageProxyInterface;
+
+    /**
+     * @return MessageInterface
+     */
+    public function popMessage() : MessageInterface;
+
+    /**
+     * @inheritDoc
+     */
+    public function getCurrentMessage() : MessageInterface;
 }
