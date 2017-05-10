@@ -12,8 +12,27 @@ services:
   header.provider.chain:
     class: Vainyl\Http\Chain\HeaderProviderChain
   header.provider: '@header.provider.chain'
+  header.storage:
+    parent: storage.proxy
+    shared: false
+    class: Vainyl\Http\Storage\HeaderStorage
+  file.storage: '@storage'
+  cookie.storage:
+    parent: storage.proxy
+    shared: false
+    class: Vainyl\Http\Storage\CookieStorage
+  stream.factory:
+    class: Vainyl\Http\Factory\StreamFactory
+  file.factory:
+    class: Vainyl\Http\Factory\FileFactory
+    arguments: ['@stream.factory', '@file.storage']
   cookie.factory:
     class: Vainyl\Http\Factory\CookieFactory
+    arguments: ['@storage']
+  stream.factory:
+    class: Vainyl\Http\Factory\StreamFactory
+  uri.factory:
+    class: Vainyl\Http\Factory\UriFactory
   request.stack:
     class: Vainyl\Http\Proxy\RequestStack
   response.stack:
@@ -24,3 +43,12 @@ services:
     decorates: emitter.factory
     class: Vainyl\Http\Decorator\LoggerEmitterFactoryDecorator
     arguments: ['@emitter.factory.logger.inner', '@logger']
+  request.factory:
+    class: Vainyl\Http\Factory\RequestFactory
+    arguments: ['@header.factory', '@cookie.factory', '@stream.factory', '@header.storage', '@cookie.storage', '@file.storage']
+  response.factory:
+    class: Vainyl\Http\Factory\RequestFactory
+    arguments: ['@header.factory', '@stream.factory', '@header.storage']
+  http.factory:
+    class: Vainyl\Http\Factory\HttpFactory
+    arguments: ['@header.provider', '@request.factory', '@response.factory', '@uri.factory', '@header.factory', '@cookie.factory', '@file.factory', '@stream.factory']

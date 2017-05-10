@@ -32,17 +32,17 @@ class ResponseFactory extends AbstractIdentifiable implements ResponseFactoryInt
     /**
      * ResponseFactory constructor.
      *
-     * @param StreamFactoryInterface $streamFactory
      * @param HeaderFactoryInterface $headerFactory
+     * @param StreamFactoryInterface $streamFactory
      * @param \ArrayAccess           $headerStorage
      */
     public function __construct(
-        StreamFactoryInterface $streamFactory,
         HeaderFactoryInterface $headerFactory,
+        StreamFactoryInterface $streamFactory,
         \ArrayAccess $headerStorage
     ) {
-        $this->streamFactory = $streamFactory;
         $this->headerFactory = $headerFactory;
+        $this->streamFactory = $streamFactory;
         $this->headerStorage = $headerStorage;
     }
 

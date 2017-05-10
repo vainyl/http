@@ -16,7 +16,6 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
 use Vainyl\Core\AbstractIdentifiable;
-use Vainyl\Http\Provider\HeaderProviderInterface;
 use Vainyl\Http\Request;
 use Vainyl\Http\ServerRequest;
 
@@ -27,8 +26,6 @@ use Vainyl\Http\ServerRequest;
  */
 class RequestFactory extends AbstractIdentifiable implements RequestFactoryInterface
 {
-    private $headerProvider;
-
     private $headerFactory;
 
     private $cookieFactory;
@@ -44,7 +41,6 @@ class RequestFactory extends AbstractIdentifiable implements RequestFactoryInter
     /**
      * RequestFactory constructor.
      *
-     * @param HeaderProviderInterface $headerProvider
      * @param HeaderFactoryInterface  $headerFactory
      * @param CookieFactoryInterface  $cookieFactory
      * @param StreamFactoryInterface  $streamFactory
@@ -53,7 +49,6 @@ class RequestFactory extends AbstractIdentifiable implements RequestFactoryInter
      * @param \ArrayAccess            $fileStorage
      */
     public function __construct(
-        HeaderProviderInterface $headerProvider,
         HeaderFactoryInterface $headerFactory,
         CookieFactoryInterface $cookieFactory,
         StreamFactoryInterface $streamFactory,
@@ -61,7 +56,6 @@ class RequestFactory extends AbstractIdentifiable implements RequestFactoryInter
         \ArrayAccess $cookieStorage,
         \ArrayAccess $fileStorage
     ) {
-        $this->headerProvider = $headerProvider;
         $this->headerFactory = $headerFactory;
         $this->cookieFactory = $cookieFactory;
         $this->streamFactory = $streamFactory;
