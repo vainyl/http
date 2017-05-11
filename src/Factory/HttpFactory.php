@@ -150,10 +150,9 @@ class HttpFactory extends AbstractIdentifiable implements HttpFactoryInterface
             $serverRequest = $serverRequest->withHeader($headerName, $headerValue);
         }
 
-
         return $serverRequest
-            ->withCookieParams((array)$this->cookieFactory->create($cookies))
-            ->withUploadedFiles((array)$this->fileFactory->create($files))
+            ->withCookieParams($this->cookieFactory->create($cookies)->toArray())
+            ->withUploadedFiles($this->fileFactory->create($files)->toArray())
             ->withBody($stream)
             ->withQueryParams($this->getQueryParams($method, $request, $query))
             ->withParsedBody($this->parseBody($method, $contentType, $stream, $body));

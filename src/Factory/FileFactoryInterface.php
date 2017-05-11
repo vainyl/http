@@ -14,6 +14,7 @@ namespace Vainyl\Http\Factory;
 
 use Psr\Http\Message\UploadedFileInterface;
 use Vainyl\Core\IdentifiableInterface;
+use Vainyl\Core\Storage\StorageInterface;
 
 /**
  * Interface FileFactoryInterface
@@ -25,9 +26,9 @@ interface FileFactoryInterface extends IdentifiableInterface
     /**
      * @param array $files
      *
-     * @return \ArrayAccess
+     * @return StorageInterface
      */
-    public function create(array $files): \ArrayAccess;
+    public function create(array $files): StorageInterface;
 
     /**
      * @param string $source
