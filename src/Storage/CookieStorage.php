@@ -12,13 +12,13 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Storage;
 
-use Vainyl\Core\Storage\Proxy\AbstractStorageProxy;
+use Vainyl\Core\Storage\Decorator\AbstractStorageDecorator;
 
 /**
  * Class CookieStorage
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class CookieStorage extends AbstractStorageProxy
+class CookieStorage extends AbstractStorageDecorator
 {
 }
