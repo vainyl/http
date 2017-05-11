@@ -84,7 +84,7 @@ class HeaderProviderChain extends AbstractIdentifiable implements HeaderProvider
         /**
          * @var HeaderProviderInterface $factory
          */
-        foreach (($copy = $this->factories->copy()) as $factory) {
+        foreach (($copy = clone $this->factories) as $factory) {
             if (null === ($headers = $factory->getHeaders($data))) {
                 continue;
             }
