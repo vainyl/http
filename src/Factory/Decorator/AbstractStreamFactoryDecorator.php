@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Decorator;
+namespace Vainyl\Http\Factory\Decorator;
 
 use Psr\Http\Message\StreamInterface;
 use Vainyl\Http\Factory\StreamFactoryInterface;

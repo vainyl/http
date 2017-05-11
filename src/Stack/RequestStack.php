@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Proxy;
+namespace Vainyl\Http\Stack;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
@@ -22,7 +22,7 @@ use Psr\Http\Message\UriInterface;
  *
  * @method ServerRequestInterface getCurrentMessage
  */
-class RequestStack extends AbstractMessageStack implements RequestProxyInterface
+class RequestStack extends AbstractMessageStack implements RequestStackInterface
 {
     /**
      * @inheritDoc

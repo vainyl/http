@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Proxy;
+namespace Vainyl\Http\Stack;
 
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -19,14 +19,14 @@ use Psr\Http\Message\ServerRequestInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface RequestProxyInterface extends ServerRequestInterface
+interface RequestStackInterface extends ServerRequestInterface
 {
     /**
      * @param ServerRequestInterface $request
      *
-     * @return RequestProxyInterface
+     * @return RequestStackInterface
      */
-    public function addRequest(ServerRequestInterface $request): RequestProxyInterface;
+    public function addRequest(ServerRequestInterface $request): RequestStackInterface;
 
     /**
      * @return ServerRequestInterface

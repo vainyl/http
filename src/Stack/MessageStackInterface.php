@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Proxy;
+namespace Vainyl\Http\Stack;
 
 use Psr\Http\Message\MessageInterface;
 
@@ -19,14 +19,14 @@ use Psr\Http\Message\MessageInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface MessageProxyInterface extends MessageInterface
+interface MessageStackInterface extends MessageInterface
 {
     /**
      * @param MessageInterface $message
      *
-     * @return MessageProxyInterface
+     * @return MessageStackInterface
      */
-    public function addMessage(MessageInterface $message) : MessageProxyInterface;
+    public function addMessage(MessageInterface $message) : MessageStackInterface;
 
     /**
      * @return MessageInterface

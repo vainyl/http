@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Proxy;
+namespace Vainyl\Http\Stack;
 
 use Psr\Http\Message\ResponseInterface;
 
@@ -21,12 +21,12 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @method ResponseInterface getCurrentMessage
  */
-abstract class ResponseStack extends AbstractMessageStack implements ResponseProxyInterface
+abstract class ResponseStack extends AbstractMessageStack implements ResponseStackInterface
 {
     /**
      * @inheritDoc
      */
-    public function addResponse(ResponseInterface $vainResponse) : ResponseProxyInterface
+    public function addResponse(ResponseInterface $vainResponse) : ResponseStackInterface
     {
         return $this->addMessage($vainResponse);
     }

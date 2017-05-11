@@ -41,7 +41,7 @@ services:
     class: Vainyl\Http\Factory\EmitterSapiFactory
   emitter.factory.logger:
     decorates: emitter.factory
-    class: Vainyl\Http\Decorator\LoggerEmitterFactoryDecorator
+    class: Vainyl\Http\Factory\Decorator\LoggerEmitterFactoryDecorator
     arguments: ['@emitter.factory.logger.inner', '@logger']
   request.factory:
     class: Vainyl\Http\Factory\RequestFactory
@@ -51,4 +51,22 @@ services:
     arguments: ['@header.factory', '@stream.factory', '@header.storage']
   http.factory:
     class: Vainyl\Http\Factory\HttpFactory
-    arguments: ['@header.provider', '@request.factory', '@response.factory', '@uri.factory', '@header.factory', '@cookie.factory', '@file.factory', '@stream.factory']
+    arguments:
+      - '@header.provider'
+      - '@request.factory'
+      - '@response.factory'
+      - '@uri.factory'
+      - '@header.factory'
+      - '@cookie.factory'
+      - '@file.factory'
+      - '@stream.factory'
+  app.http.exception:
+    decorates: app.http
+    decoration_priority: 100
+    class: Vainyl\Http\Application\Decorator\ExceptionApplicationDecorator
+    arguments: ['@app.http.exception.inner', '@response.factory']
+  app.http.stack:
+    decorates: app.http
+    decoration_priority: 200
+    class: Vainyl\Http\Application\Decorator\HttpStackApplicationDecorator
+    arguments: ['@app.http.stack.inner', '@request.stack', '@response.stack', '@response.factory']
