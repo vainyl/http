@@ -19,7 +19,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class ResponseStack extends AbstractMessageStack implements ResponseStackInterface
+class ResponseStack extends AbstractMessageStack implements ResponseStackInterface
 {
     /**
      * @inheritDoc
