@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Decorator;
 
+use Vainyl\Core\Storage\StorageInterface;
 use Vainyl\Http\CookieInterface;
 use Vainyl\Http\Factory\CookieFactoryInterface;
 use Vainyl\Time\TimeInterface;
@@ -46,7 +47,7 @@ abstract class AbstractCookieFactoryDecorator implements CookieFactoryInterface
     /**
      * @inheritDoc
      */
-    public function create(array $cookies): \ArrayAccess
+    public function create(array $cookies): StorageInterface
     {
         return $this->cookieFactory->create($cookies);
     }
