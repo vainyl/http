@@ -14,13 +14,14 @@ namespace Vainyl\Http;
 
 use Psr\Http\Message\UriInterface;
 use Vainyl\Core\AbstractIdentifiable;
+use Vainyl\Core\ArrayInterface;
 
 /**
  * Class Uri
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class Uri extends AbstractIdentifiable implements UriInterface
+class Uri extends AbstractIdentifiable implements UriInterface, ArrayInterface
 {
     const STANDARD_PORTS = ['http' => 80, 'https' => 443];
 
@@ -265,5 +266,22 @@ class Uri extends AbstractIdentifiable implements UriInterface
         }
 
         return ($this->port === self::STANDARD_PORTS[$this->scheme]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'scheme'   => $this->scheme,
+            'user'     => $this->user,
+            'password' => $this->password,
+            'host'     => $this->host,
+            'port'     => $this->port,
+            'path'     => $this->path,
+            'query'    => $this->query,
+            'fragment' => $this->fragment,
+        ];
     }
 }

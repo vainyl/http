@@ -148,4 +148,12 @@ class Response extends AbstractMessage implements ResponseInterface
 
         return self::CODE_TO_MESSAGE[$this->code];
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return array_merge(['code' => $this->code, 'message' => $this->message], parent::toArray());
+    }
 }

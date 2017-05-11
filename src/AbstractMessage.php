@@ -15,6 +15,7 @@ namespace Vainyl\Http;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
 use Vainyl\Core\AbstractIdentifiable;
+use Vainyl\Core\ArrayInterface;
 use Vainyl\Http\Exception\UnsupportedProtocolException;
 use Vainyl\Http\Factory\HeaderFactoryInterface;
 
@@ -23,7 +24,7 @@ use Vainyl\Http\Factory\HeaderFactoryInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractMessage extends AbstractIdentifiable implements MessageInterface
+abstract class AbstractMessage extends AbstractIdentifiable implements MessageInterface, ArrayInterface
 {
     const HEADER_CONTENT_TYPE = 'Content-Type';
     const HEADER_EXPIRES = 'Expires';
@@ -217,5 +218,17 @@ abstract class AbstractMessage extends AbstractIdentifiable implements MessageIn
         $this->headerStorage = clone $this->headerStorage;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'protocol' => $this->protocol,
+            'body'     => $this->stream->getContents(),
+            'headers'  => $this->getHeaders(),
+        ];
     }
 }
