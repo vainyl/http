@@ -20,7 +20,6 @@ services:
   cookie.storage:
     shared: false
     class: Vainyl\Http\Storage\CookieStorage
-    arguments: ['@storage.prototype']
   stream.factory:
     class: Vainyl\Http\Factory\StreamFactory
   file.factory:
