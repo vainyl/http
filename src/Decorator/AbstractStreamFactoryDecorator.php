@@ -53,7 +53,7 @@ abstract class AbstractStreamFactoryDecorator implements StreamFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createResource(resource $resource): StreamInterface
+    public function createResource($resource): StreamInterface
     {
         return $this->streamFactory->createResource($resource);
     }
