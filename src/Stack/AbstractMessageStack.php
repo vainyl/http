@@ -36,7 +36,7 @@ abstract class AbstractMessageStack implements MessageStackInterface
     /**
      * @inheritDoc
      */
-    public function addMessage(MessageInterface $message)
+    public function addMessage(MessageInterface $message) : MessageStackInterface
     {
         $this->stack->push($message);
 
@@ -46,7 +46,7 @@ abstract class AbstractMessageStack implements MessageStackInterface
     /**
      * @inheritDoc
      */
-    public function popMessage()
+    public function popMessage() : MessageInterface
     {
         return $this->stack->pop();
     }
@@ -54,7 +54,7 @@ abstract class AbstractMessageStack implements MessageStackInterface
     /**
      * @inheritDoc
      */
-    public function getCurrentMessage()
+    public function getCurrentMessage() : MessageInterface
     {
         return $this->stack->peek();
     }

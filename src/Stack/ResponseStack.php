@@ -18,8 +18,6 @@ use Psr\Http\Message\ResponseInterface;
  * Class ResponseStack
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
- *
- * @method ResponseInterface getCurrentMessage
  */
 abstract class ResponseStack extends AbstractMessageStack implements ResponseStackInterface
 {
@@ -40,7 +38,7 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponseSta
     }
 
     /**
-     * @return ResponseInterface
+     * @inheritDoc
      */
     public function getCurrentResponse() : ResponseInterface
     {
@@ -52,7 +50,7 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponseSta
      */
     public function getStatusCode()
     {
-        return $this->getCurrentMessage()->getStatusCode();
+        return $this->getCurrentResponse()->getStatusCode();
     }
 
     /**
@@ -60,7 +58,7 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponseSta
      */
     public function withStatus($code, $reasonPhrase = '')
     {
-        $response = $this->popMessage()->withStatus($code, $reasonPhrase);
+        $response = $this->popResponse()->withStatus($code, $reasonPhrase);
         $this->addResponse($response);
 
         return $this;
@@ -71,6 +69,6 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponseSta
      */
     public function getReasonPhrase()
     {
-        return $this->getCurrentMessage()->getReasonPhrase();
+        return $this->getCurrentResponse()->getReasonPhrase();
     }
 }
