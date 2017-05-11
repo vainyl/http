@@ -12,14 +12,14 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Storage;
 
-use Vainyl\Core\Storage\Proxy\AbstractStorageProxy;
+use Vainyl\Core\Storage\Decorator\AbstractStorageDecorator;
 
 /**
  * Class HeaderStorage
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class HeaderStorage extends AbstractStorageProxy
+class HeaderStorage extends AbstractStorageDecorator
 {
     /**
      * @inheritDoc

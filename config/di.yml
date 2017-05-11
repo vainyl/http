@@ -13,14 +13,14 @@ services:
     class: Vainyl\Http\Chain\HeaderProviderChain
   header.provider: '@header.provider.chain'
   header.storage:
-    parent: storage.proxy
     shared: false
     class: Vainyl\Http\Storage\HeaderStorage
-  file.storage: '@storage.proxy'
+    arguments: ['@storage.prototype']
+  file.storage: '@storage.prototype'
   cookie.storage:
-    parent: storage.proxy
     shared: false
     class: Vainyl\Http\Storage\CookieStorage
+    arguments: ['@storage.prototype']
   stream.factory:
     class: Vainyl\Http\Factory\StreamFactory
   file.factory:
@@ -28,7 +28,7 @@ services:
     arguments: ['@stream.factory', '@file.storage']
   cookie.factory:
     class: Vainyl\Http\Factory\CookieFactory
-    arguments: ['@storage']
+    arguments: ['@storage.prototype']
   stream.factory:
     class: Vainyl\Http\Factory\StreamFactory
   uri.factory:
