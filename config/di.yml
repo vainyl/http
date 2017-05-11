@@ -34,9 +34,9 @@ services:
   uri.factory:
     class: Vainyl\Http\Factory\UriFactory
   request.stack:
-    class: Vainyl\Http\Proxy\RequestStack
+    class: Vainyl\Http\Stack\RequestStack
   response.stack:
-    class: Vainyl\Http\Proxy\ResponseStack
+    class: Vainyl\Http\Stack\ResponseStack
   emitter.factory.sapi:
     class: Vainyl\Http\Factory\EmitterSapiFactory
   emitter.factory.logger:
