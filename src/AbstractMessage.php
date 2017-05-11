@@ -110,7 +110,7 @@ abstract class AbstractMessage extends AbstractIdentifiable implements MessageIn
     public function withHeader($name, $value): MessageInterface
     {
         $copy = clone $this;
-        $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, $value);
+        $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, [$value]);
 
         return $copy;
     }
@@ -122,7 +122,7 @@ abstract class AbstractMessage extends AbstractIdentifiable implements MessageIn
     {
         $copy = clone $this;
         if (false === $copy->headerStorage->offsetExists($name)) {
-            $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, $value);
+            $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, [$value]);
         } else {
             $copy->headerStorage[$name]->addValue($value);
         }
