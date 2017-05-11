@@ -35,6 +35,14 @@ abstract class AbstractMessageDecorator implements MessageInterface
     }
 
     /**
+     * @return MessageInterface
+     */
+    public function getMessage(): MessageInterface
+    {
+        return $this->message;
+    }
+
+    /**
      * @inheritDoc
      */
     public function getProtocolVersion()
