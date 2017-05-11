@@ -77,7 +77,7 @@ abstract class AbstractRequestDecorator extends AbstractMessageDecorator impleme
      */
     public function getUri()
     {
-        return $this->getMessage()->getRequestTarget();
+        return $this->getMessage()->getUri();
     }
 
     /**
