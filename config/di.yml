@@ -47,7 +47,7 @@ services:
     class: Vainyl\Http\Factory\RequestFactory
     arguments: ['@header.factory', '@cookie.factory', '@stream.factory', '@header.storage', '@cookie.storage', '@file.storage']
   response.factory:
-    class: Vainyl\Http\Factory\RequestFactory
+    class: Vainyl\Http\Factory\ResponseFactory
     arguments: ['@header.factory', '@stream.factory', '@header.storage']
   http.factory:
     class: Vainyl\Http\Factory\HttpFactory
