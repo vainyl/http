@@ -159,6 +159,6 @@ abstract class AbstractMessageDecorator implements MessageInterface, ArrayInterf
      */
     public function toArray(): array
     {
-        return $this->toArray();
+        return $this->message->toArray();
     }
 }
