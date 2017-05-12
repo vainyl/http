@@ -49,13 +49,15 @@ class ExceptionApplicationDecorator extends AbstractHttpApplicationDecorator
         try {
             $response = parent::handle($request);
         } catch (AbstractCoreException $exception) {
-            $response = $this->responseFactory
-                ->createResponse($exception->getCode())
+            $response = $this->responseFactory->createResponse($exception->getCode());
+
+            $response
                 ->getBody()
                 ->write($exception->getMessage());
         } catch (\Exception $exception) {
-            $response = $this->responseFactory
-                ->createResponse(500)
+            $response = $this->responseFactory->createResponse(500);
+
+            $response
                 ->getBody()
                 ->write($exception->getMessage());
         }
