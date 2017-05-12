@@ -133,7 +133,7 @@ class StringStream implements StreamInterface
     {
         $this->string = $string;
 
-        return $this;
+        return strlen($string);
     }
 
     /**
