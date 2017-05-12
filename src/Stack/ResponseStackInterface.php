@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Proxy;
+namespace Vainyl\Http\Stack;
 
 use Psr\Http\Message\ResponseInterface;
 
@@ -19,14 +19,14 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface ResponseProxyInterface extends ResponseInterface
+interface ResponseStackInterface extends ResponseInterface
 {
     /**
      * @param ResponseInterface $vainResponse
      *
-     * @return ResponseProxyInterface
+     * @return ResponseStackInterface
      */
-    public function addResponse(ResponseInterface $vainResponse) : ResponseProxyInterface;
+    public function addResponse(ResponseInterface $vainResponse) : ResponseStackInterface;
 
     /**
      * @return ResponseInterface

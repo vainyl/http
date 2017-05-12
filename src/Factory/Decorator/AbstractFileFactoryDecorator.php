@@ -10,9 +10,10 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Decorator;
+namespace Vainyl\Http\Factory\Decorator;
 
 use Psr\Http\Message\UploadedFileInterface;
+use Vainyl\Core\Storage\StorageInterface;
 use Vainyl\Http\Factory\FileFactoryInterface;
 
 /**
@@ -45,7 +46,7 @@ abstract class AbstractFileFactoryDecorator implements FileFactoryInterface
     /**
      * @inheritDoc
      */
-    public function create(array $files): \ArrayAccess
+    public function create(array $files): StorageInterface
     {
         return $this->fileFactory->create($files);
     }

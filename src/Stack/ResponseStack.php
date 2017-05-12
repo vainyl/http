@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Proxy;
+namespace Vainyl\Http\Stack;
 
 use Psr\Http\Message\ResponseInterface;
 
@@ -18,15 +18,13 @@ use Psr\Http\Message\ResponseInterface;
  * Class ResponseStack
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
- *
- * @method ResponseInterface getCurrentMessage
  */
-abstract class ResponseStack extends AbstractMessageStack implements ResponseProxyInterface
+class ResponseStack extends AbstractMessageStack implements ResponseStackInterface
 {
     /**
      * @inheritDoc
      */
-    public function addResponse(ResponseInterface $vainResponse) : ResponseProxyInterface
+    public function addResponse(ResponseInterface $vainResponse) : ResponseStackInterface
     {
         return $this->addMessage($vainResponse);
     }
@@ -52,7 +50,7 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponsePro
      */
     public function getStatusCode()
     {
-        return $this->getCurrentMessage()->getStatusCode();
+        return $this->getCurrentResponse()->getStatusCode();
     }
 
     /**
@@ -60,7 +58,7 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponsePro
      */
     public function withStatus($code, $reasonPhrase = '')
     {
-        $response = $this->popMessage()->withStatus($code, $reasonPhrase);
+        $response = $this->popResponse()->withStatus($code, $reasonPhrase);
         $this->addResponse($response);
 
         return $this;
@@ -71,6 +69,6 @@ abstract class ResponseStack extends AbstractMessageStack implements ResponsePro
      */
     public function getReasonPhrase()
     {
-        return $this->getCurrentMessage()->getReasonPhrase();
+        return $this->getCurrentResponse()->getReasonPhrase();
     }
 }

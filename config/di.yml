@@ -1,4 +1,8 @@
 services:
+  logger.http:
+    synthetic: true
+    tags:
+      - {name: 'logger', channel: 'http'}
   header.factory:
     class: Vainyl\Http\Factory\HeaderFactory
   header.provider.apache:
@@ -34,21 +38,42 @@ services:
   uri.factory:
     class: Vainyl\Http\Factory\UriFactory
   request.stack:
-    class: Vainyl\Http\Proxy\RequestStack
+    class: Vainyl\Http\Stack\RequestStack
   response.stack:
-    class: Vainyl\Http\Proxy\ResponseStack
+    class: Vainyl\Http\Stack\ResponseStack
   emitter.factory.sapi:
     class: Vainyl\Http\Factory\EmitterSapiFactory
   emitter.factory.logger:
     decorates: emitter.factory
-    class: Vainyl\Http\Decorator\LoggerEmitterFactoryDecorator
-    arguments: ['@emitter.factory.logger.inner', '@logger']
+    class: Vainyl\Http\Factory\Decorator\LoggerEmitterFactoryDecorator
+    arguments: ['@emitter.factory.logger.inner', '@logger.http']
   request.factory:
     class: Vainyl\Http\Factory\RequestFactory
     arguments: ['@header.factory', '@cookie.factory', '@stream.factory', '@header.storage', '@cookie.storage', '@file.storage']
   response.factory:
-    class: Vainyl\Http\Factory\RequestFactory
+    class: Vainyl\Http\Factory\ResponseFactory
     arguments: ['@header.factory', '@stream.factory', '@header.storage']
   http.factory:
     class: Vainyl\Http\Factory\HttpFactory
-    arguments: ['@header.provider', '@request.factory', '@response.factory', '@uri.factory', '@header.factory', '@cookie.factory', '@file.factory', '@stream.factory']
+    arguments:
+      - '@header.provider'
+      - '@request.factory'
+      - '@response.factory'
+      - '@uri.factory'
+      - '@header.factory'
+      - '@cookie.factory'
+      - '@file.factory'
+      - '@stream.factory'
+  app.http:
+    class: Vainyl\Http\Application\HttpApplication
+    arguments: ['@response.factory']
+  app.http.exception:
+    decorates: app.http
+    decoration_priority: 200
+    class: Vainyl\Http\Application\Decorator\ExceptionApplicationDecorator
+    arguments: ['@app.http.exception.inner', '@encoder.storage', '@response.factory']
+  app.http.stack:
+    decorates: app.http
+    decoration_priority: 300
+    class: Vainyl\Http\Application\Decorator\HttpStackApplicationDecorator
+    arguments: ['@app.http.stack.inner', '@request.stack', '@response.stack', '@response.factory']

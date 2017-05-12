@@ -34,5 +34,5 @@ interface StreamFactoryInterface extends IdentifiableInterface
      *
      * @return StreamInterface
      */
-    public function createResource(resource $resource): StreamInterface;
+    public function createResource($resource): StreamInterface;
 }

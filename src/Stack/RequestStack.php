@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Proxy;
+namespace Vainyl\Http\Stack;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
@@ -19,15 +19,13 @@ use Psr\Http\Message\UriInterface;
  * Class RequestStack
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
- *
- * @method ServerRequestInterface getCurrentMessage
  */
-class RequestStack extends AbstractMessageStack implements RequestProxyInterface
+class RequestStack extends AbstractMessageStack implements RequestStackInterface
 {
     /**
      * @inheritDoc
      */
-    public function addRequest(ServerRequestInterface $request): RequestStack
+    public function addRequest(ServerRequestInterface $request): RequestStackInterface
     {
         return $this->addMessage($request);
     }
@@ -53,7 +51,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getRequestTarget(): string
     {
-        return $this->getCurrentMessage()->getRequestTarget();
+        return $this->getCurrentRequest()->getRequestTarget();
     }
 
     /**
@@ -61,7 +59,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function withRequestTarget($requestTarget): ServerRequestInterface
     {
-        $request = $this->popMessage()->withRequestTarget($requestTarget);
+        $request = $this->popRequest()->withRequestTarget($requestTarget);
         $this->addRequest($request);
 
         return $this;
@@ -72,7 +70,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getMethod(): string
     {
-        return $this->getCurrentMessage()->getMethod();
+        return $this->getCurrentRequest()->getMethod();
     }
 
     /**
@@ -80,7 +78,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function withMethod($method): ServerRequestInterface
     {
-        $request = $this->popMessage()->withMethod($method);
+        $request = $this->popRequest()->withMethod($method);
         $this->addRequest($request);
 
         return $this;
@@ -91,7 +89,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getUri(): UriInterface
     {
-        return $this->getCurrentMessage()->getUri();
+        return $this->getCurrentRequest()->getUri();
     }
 
     /**
@@ -99,7 +97,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function withUri(UriInterface $uri, $preserveHost = false): ServerRequestInterface
     {
-        $request = $this->popMessage()->withUri($uri, $preserveHost);
+        $request = $this->popRequest()->withUri($uri, $preserveHost);
         $this->addRequest($request);
 
         return $this;
@@ -110,7 +108,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getServerParams(): array
     {
-        return $this->getCurrentMessage()->getServerParams();
+        return $this->getCurrentRequest()->getServerParams();
     }
 
     /**
@@ -118,7 +116,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getCookieParams(): array
     {
-        return $this->getCurrentMessage()->getCookieParams();
+        return $this->getCurrentRequest()->getCookieParams();
     }
 
     /**
@@ -126,7 +124,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function withCookieParams(array $cookies): ServerRequestInterface
     {
-        $request = $this->popMessage()->withCookieParams($cookies);
+        $request = $this->popRequest()->withCookieParams($cookies);
         $this->addRequest($request);
 
         return $this;
@@ -137,7 +135,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getQueryParams(): array
     {
-        return $this->getCurrentMessage()->getQueryParams();
+        return $this->getCurrentRequest()->getQueryParams();
     }
 
     /**
@@ -145,7 +143,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function withQueryParams(array $query): ServerRequestInterface
     {
-        $request = $this->popMessage()->withQueryParams($query);
+        $request = $this->popRequest()->withQueryParams($query);
         $this->addRequest($request);
 
         return $this;
@@ -156,7 +154,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getUploadedFiles()
     {
-        return $this->getCurrentMessage()->getUploadedFiles();
+        return $this->getCurrentRequest()->getUploadedFiles();
     }
 
     /**
@@ -164,7 +162,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function withUploadedFiles(array $uploadedFiles): ServerRequestInterface
     {
-        $request = $this->popMessage()->withUploadedFiles($uploadedFiles);
+        $request = $this->popRequest()->withUploadedFiles($uploadedFiles);
         $this->addRequest($request);
 
         return $this;
@@ -175,7 +173,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getParsedBody(): array
     {
-        return $this->getCurrentMessage()->getParsedBody();
+        return $this->getCurrentRequest()->getParsedBody();
     }
 
     /**
@@ -183,7 +181,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function withParsedBody($data): ServerRequestInterface
     {
-        $request = $this->popMessage()->withParsedBody($data);
+        $request = $this->popRequest()->withParsedBody($data);
         $this->addRequest($request);
 
         return $this;
@@ -194,7 +192,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getAttributes(): array
     {
-        return $this->getCurrentMessage()->getAttributes();
+        return $this->getCurrentRequest()->getAttributes();
     }
 
     /**
@@ -202,7 +200,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function getAttribute($name, $default = null)
     {
-        return $this->getCurrentMessage()->getAttribute($name, $default);
+        return $this->getCurrentRequest()->getAttribute($name, $default);
     }
 
     /**
@@ -210,7 +208,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function withAttribute($name, $value): ServerRequestInterface
     {
-        $request = $this->popMessage()->withAttribute($name, $value);
+        $request = $this->popRequest()->withAttribute($name, $value);
         $this->addRequest($request);
 
         return $this;
@@ -221,7 +219,7 @@ class RequestStack extends AbstractMessageStack implements RequestProxyInterface
      */
     public function withoutAttribute($name): ServerRequestInterface
     {
-        $request = $this->popMessage()->withoutAttribute($name);
+        $request = $this->popRequest()->withoutAttribute($name);
         $this->addRequest($request);
 
         return $this;

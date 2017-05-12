@@ -14,13 +14,14 @@ namespace Vainyl\Http\Decorator;
 
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
+use Vainyl\Core\ArrayInterface;
 
 /**
  * Class AbstractMessageDecorator
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractMessageDecorator implements MessageInterface
+abstract class AbstractMessageDecorator implements MessageInterface, ArrayInterface
 {
     protected $message;
 
@@ -32,6 +33,22 @@ abstract class AbstractMessageDecorator implements MessageInterface
     public function __construct(MessageInterface $message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getId(): string
+    {
+        return spl_object_hash($this->message);
+    }
+
+    /**
+     * @return MessageInterface
+     */
+    public function getMessage(): MessageInterface
+    {
+        return $this->message;
     }
 
     /**
@@ -135,5 +152,13 @@ abstract class AbstractMessageDecorator implements MessageInterface
         $copy->message = $this->message->withBody($body);
 
         return $copy;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return $this->message->toArray();
     }
 }

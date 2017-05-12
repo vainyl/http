@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Proxy;
+namespace Vainyl\Http\Stack;
 
 use Ds\Stack;
 use Psr\Http\Message\MessageInterface;
@@ -21,7 +21,7 @@ use Psr\Http\Message\StreamInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractMessageStack implements MessageProxyInterface
+abstract class AbstractMessageStack implements MessageStackInterface
 {
     private $stack;
 
@@ -36,7 +36,7 @@ abstract class AbstractMessageStack implements MessageProxyInterface
     /**
      * @inheritDoc
      */
-    public function addMessage(MessageInterface $message)
+    public function addMessage(MessageInterface $message) : MessageStackInterface
     {
         $this->stack->push($message);
 
@@ -46,7 +46,7 @@ abstract class AbstractMessageStack implements MessageProxyInterface
     /**
      * @inheritDoc
      */
-    public function popMessage()
+    public function popMessage() : MessageInterface
     {
         return $this->stack->pop();
     }
@@ -54,7 +54,7 @@ abstract class AbstractMessageStack implements MessageProxyInterface
     /**
      * @inheritDoc
      */
-    public function getCurrentMessage()
+    public function getCurrentMessage() : MessageInterface
     {
         return $this->stack->peek();
     }

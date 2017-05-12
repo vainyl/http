@@ -128,4 +128,12 @@ class Request extends AbstractMessage implements RequestInterface
 
         return parent::__clone();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return array_merge(['method' => $this->method, 'uri' => $this->uri->toArray()], parent::toArray());
+    }
 }

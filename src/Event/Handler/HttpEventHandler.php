@@ -12,10 +12,10 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Event\Handler;
 
-use Psr\Log\LoggerInterface;
 use Vainyl\Event\AbstractEventHandler;
 use Vainyl\Http\Event\RequestEventInterface;
 use Vainyl\Http\Event\ResponseEventInterface;
+use Vainyl\Logger\DynamicLoggerInterface;
 
 /**
  * Class HttpEventHandler
@@ -33,10 +33,10 @@ class HttpEventHandler extends AbstractEventHandler implements
     /**
      * DynamicLogger constructor.
      *
-     * @param LoggerInterface        $logger
+     * @param DynamicLoggerInterface $logger
      * @param string                 $logHeader
      */
-    public function __construct(LoggerInterface $logger, string $logHeader)
+    public function __construct(DynamicLoggerInterface $logger, string $logHeader)
     {
         $this->logger = $logger;
         $this->logHeader = $logHeader;

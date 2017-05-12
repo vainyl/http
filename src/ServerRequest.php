@@ -231,4 +231,21 @@ class ServerRequest extends Request implements ServerRequestInterface
 
         return $copy;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return array_merge(
+            [
+                'files'       => '',
+                'cookies'     => '',
+                'query'       => $this->queryParams,
+                'attributes'  => $this->attributes,
+                'parsed_body' => $this->parsedBody,
+            ],
+            parent::toArray()
+        );
+    }
 }

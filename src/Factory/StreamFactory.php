@@ -35,7 +35,7 @@ class StreamFactory extends AbstractIdentifiable implements StreamFactoryInterfa
     /**
      * @inheritDoc
      */
-    public function createResource(resource $resource): StreamInterface
+    public function createResource($resource): StreamInterface
     {
         return new ResourceStream($resource);
     }

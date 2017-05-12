@@ -10,16 +10,14 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Proxy;
-
-use Psr\Http\Message\MessageInterface;
+namespace Vainyl\Http\Application\Decorator;
 
 /**
- * Interface MessageProxyInterface
+ * Class EventApplicationDecorator
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface MessageProxyInterface extends MessageInterface
+class EventApplicationDecorator extends AbstractHttpApplicationDecorator
 {
     /**
      * @param MessageInterface $message

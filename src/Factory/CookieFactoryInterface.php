@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Vainyl\Http\Factory;
 
 use Vainyl\Core\IdentifiableInterface;
+use Vainyl\Core\Storage\StorageInterface;
 use Vainyl\Http\CookieInterface;
 use Vainyl\Time\TimeInterface;
 
@@ -26,9 +27,9 @@ interface CookieFactoryInterface extends IdentifiableInterface
     /**
      * @param array $cookies
      *
-     * @return \ArrayAccess
+     * @return StorageInterface
      */
-    public function create(array $cookies) : \ArrayAccess;
+    public function create(array $cookies) : StorageInterface;
 
     /**
      * @param string             $name

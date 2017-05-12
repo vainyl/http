@@ -14,6 +14,7 @@ namespace Vainyl\Http\Factory;
 
 use Psr\Http\Message\UploadedFileInterface;
 use Vainyl\Core\AbstractIdentifiable;
+use Vainyl\Core\Storage\StorageInterface;
 use Vainyl\Http\Exception\UnsupportedFilesException;
 use Vainyl\Http\File;
 
@@ -32,9 +33,9 @@ class FileFactory extends AbstractIdentifiable implements FileFactoryInterface
      * FileFactory constructor.
      *
      * @param StreamFactoryInterface $streamFactory
-     * @param \ArrayAccess           $fileStorage
+     * @param StorageInterface           $fileStorage
      */
-    public function __construct(StreamFactoryInterface $streamFactory, \ArrayAccess $fileStorage)
+    public function __construct(StreamFactoryInterface $streamFactory, StorageInterface $fileStorage)
     {
         $this->streamFactory = $streamFactory;
         $this->fileStorage = $fileStorage;
@@ -71,7 +72,7 @@ class FileFactory extends AbstractIdentifiable implements FileFactoryInterface
     /**
      * @inheritDoc
      */
-    public function create(array $data): \ArrayAccess
+    public function create(array $data): StorageInterface
     {
         $files = clone $this->fileStorage;
         foreach ($data as $key => $fileSpec) {

@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Vainyl\Http\Decorator;
+namespace Vainyl\Http\Factory\Decorator;
 
 use Psr\Http\Message\StreamInterface;
 use Vainyl\Http\Factory\StreamFactoryInterface;
@@ -53,7 +53,7 @@ abstract class AbstractStreamFactoryDecorator implements StreamFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createResource(resource $resource): StreamInterface
+    public function createResource($resource): StreamInterface
     {
         return $this->streamFactory->createResource($resource);
     }
