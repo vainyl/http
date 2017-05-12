@@ -42,7 +42,7 @@ services:
   emitter.factory.logger:
     decorates: emitter.factory
     class: Vainyl\Http\Factory\Decorator\LoggerEmitterFactoryDecorator
-    arguments: ['@emitter.factory.logger.inner', '@logger']
+    arguments: ['@emitter.factory.logger.inner', '@logger.http']
   request.factory:
     class: Vainyl\Http\Factory\RequestFactory
     arguments: ['@header.factory', '@cookie.factory', '@stream.factory', '@header.storage', '@cookie.storage', '@file.storage']
