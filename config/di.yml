@@ -67,7 +67,7 @@ services:
     decorates: app.http
     decoration_priority: 200
     class: Vainyl\Http\Application\Decorator\ExceptionApplicationDecorator
-    arguments: ['@app.http.exception.inner', '@response.factory']
+    arguments: ['@app.http.exception.inner', '@encoder.storage', '@response.factory']
   app.http.stack:
     decorates: app.http
     decoration_priority: 300
