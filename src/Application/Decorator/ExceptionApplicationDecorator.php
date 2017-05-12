@@ -14,6 +14,7 @@ namespace Vainyl\Http\Application\Decorator;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Vainyl\Core\Encoder\Storage\EncoderStorageInterface;
 use Vainyl\Core\Exception\AbstractCoreException;
 use Vainyl\Http\Application\HttpApplicationInterface;
 use Vainyl\Http\Factory\ResponseFactoryInterface;
@@ -25,18 +26,23 @@ use Vainyl\Http\Factory\ResponseFactoryInterface;
  */
 class ExceptionApplicationDecorator extends AbstractHttpApplicationDecorator
 {
+    private $encoderStorage;
+
     private $responseFactory;
 
     /**
      * ExceptionApplicationDecorator constructor.
      *
      * @param HttpApplicationInterface $application
+     * @param EncoderStorageInterface  $encoderStorage
      * @param ResponseFactoryInterface $responseFactory
      */
     public function __construct(
         HttpApplicationInterface $application,
+        EncoderStorageInterface $encoderStorage,
         ResponseFactoryInterface $responseFactory
     ) {
+        $this->encoderStorage = $encoderStorage;
         $this->responseFactory = $responseFactory;
         parent::__construct($application);
     }
@@ -49,14 +55,18 @@ class ExceptionApplicationDecorator extends AbstractHttpApplicationDecorator
         try {
             $response = parent::handle($request);
         } catch (AbstractCoreException $exception) {
-            $response = $this->responseFactory->createResponse($exception->getCode());
-
+            $contentType = $request->hasHeader('Content-Type') ? $request->getHeader('Content-Type') : 'text/html';
+            $response = $this->responseFactory
+                ->createResponse($exception->getCode())
+                ->withHeader('Content-Type', $contentType);
             $response
                 ->getBody()
-                ->write($exception->getMessage());
+                ->write($this->encoderStorage->getEncoder($contentType)->encode($exception->toArray()));
         } catch (\Exception $exception) {
-            $response = $this->responseFactory->createResponse(500);
-
+            $contentType = $request->hasHeader('Content-Type') ? $request->getHeader('Content-Type') : 'text/html';
+            $response = $this->responseFactory
+                ->createResponse(500)
+                ->withHeader('Content-Type', $contentType);
             $response
                 ->getBody()
                 ->write($exception->getMessage());
