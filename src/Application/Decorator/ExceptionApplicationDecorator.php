@@ -17,7 +17,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Vainyl\Core\Exception\AbstractCoreException;
 use Vainyl\Http\Application\HttpApplicationInterface;
 use Vainyl\Http\Factory\ResponseFactoryInterface;
-use Vainyl\Http\Factory\StreamFactoryInterface;
 
 /**
  * Class ExceptionApplicationDecorator
@@ -26,23 +25,18 @@ use Vainyl\Http\Factory\StreamFactoryInterface;
  */
 class ExceptionApplicationDecorator extends AbstractHttpApplicationDecorator
 {
-    private $streamFactory;
-
     private $responseFactory;
 
     /**
      * ExceptionApplicationDecorator constructor.
      *
      * @param HttpApplicationInterface $application
-     * @param StreamFactoryInterface $streamFactory
      * @param ResponseFactoryInterface $responseFactory
      */
     public function __construct(
         HttpApplicationInterface $application,
-        StreamFactoryInterface $streamFactory,
         ResponseFactoryInterface $responseFactory
     ) {
-        $this->streamFactory = $streamFactory;
         $this->responseFactory = $responseFactory;
         parent::__construct($application);
     }
@@ -57,11 +51,13 @@ class ExceptionApplicationDecorator extends AbstractHttpApplicationDecorator
         } catch (AbstractCoreException $exception) {
             $response = $this->responseFactory
                 ->createResponse($exception->getCode())
-                ->withBody($this->streamFactory->createStream($exception->getMessage()));
+                ->getBody()
+                ->write($exception->getMessage());
         } catch (\Exception $exception) {
             $response = $this->responseFactory
                 ->createResponse(500)
-                ->withBody($this->streamFactory->createStream($exception->getMessage()));
+                ->getBody()
+                ->write($exception->getMessage());
         }
 
         return $response;
