@@ -12,14 +12,14 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Extension;
 
-use Vainyl\Core\Extension\AbstractExtension;
+use Vainyl\Core\Extension\AbstractFrameworkExtension;
 
 /**
  * Class HttpExtension
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class HttpExtension extends AbstractExtension
+class HttpExtension extends AbstractFrameworkExtension
 {
     /**
      * @inheritDoc
