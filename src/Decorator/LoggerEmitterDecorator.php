@@ -42,7 +42,7 @@ class LoggerEmitterDecorator extends AbstractEmitterDecorator
      */
     public function send(ResponseInterface $response): EmitterInterface
     {
-        $this->logger->debug(sprintf('Sending response %s', json_encode($response->toArray())));
+        $this->logger->debug(sprintf('Sending response %s', json_encode($response)));
         parent::send($response);
         $this->logger->debug('Response sent');
 
