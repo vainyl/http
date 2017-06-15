@@ -67,13 +67,13 @@ services:
   app.http:
     class: Vainyl\Http\Application\HttpApplication
     arguments: ['@response.factory']
-#  app.http.exception:
-#    decorates: app.http
-#    decoration_priority: 200
-#    class: Vainyl\Http\Application\Decorator\ExceptionApplicationDecorator
-#    arguments: ['@app.http.exception.inner', '@encoder.storage', '@response.factory']
-#  app.http.stack:
-#    decorates: app.http
-#    decoration_priority: 300
-#    class: Vainyl\Http\Application\Decorator\HttpStackApplicationDecorator
-#    arguments: ['@app.http.stack.inner', '@request.stack', '@response.stack', '@response.factory']
+  app.http.exception:
+    decorates: app.http
+    decoration_priority: 200
+    class: Vainyl\Http\Application\Decorator\ExceptionApplicationDecorator
+    arguments: ['@app.http.exception.inner', '@encoder.storage', '@response.factory']
+  app.http.stack:
+    decorates: app.http
+    decoration_priority: 300
+    class: Vainyl\Http\Application\Decorator\HttpStackApplicationDecorator
+    arguments: ['@app.http.stack.inner', '@request.stack', '@response.stack', '@response.factory']
