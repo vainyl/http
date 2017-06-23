@@ -41,7 +41,7 @@ services:
     class: Vainyl\Http\Stack\RequestStack
   response.stack:
     class: Vainyl\Http\Stack\ResponseStack
-  emitter.factory.sapi:
+  emitter.factory:
     class: Vainyl\Http\Factory\EmitterSapiFactory
   emitter.factory.logger:
     decorates: emitter.factory

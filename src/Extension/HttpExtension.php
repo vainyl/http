@@ -12,29 +12,20 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Extension;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Vainyl\Core\Application\EnvironmentInterface;
-use Vainyl\Core\Extension\AbstractExtension;
+use Vainyl\Core\Extension\AbstractFrameworkExtension;
 
 /**
  * Class HttpExtension
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class HttpExtension extends AbstractExtension
+class HttpExtension extends AbstractFrameworkExtension
 {
     /**
      * @inheritDoc
      */
-    public function load(
-        array $configs,
-        ContainerBuilder $container,
-        EnvironmentInterface $environment = null
-    ): AbstractExtension {
-        $container->addCompilerPass(new HeaderProviderCompilerPass());
-
-        $container->setAlias('emitter.factory', 'emitter.factory.sapi');
-
-        return parent::load($configs, $container, $environment);
+    public function getCompilerPasses(): array
+    {
+        return [new HeaderProviderCompilerPass()];
     }
 }

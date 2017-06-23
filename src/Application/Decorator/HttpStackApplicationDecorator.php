@@ -58,9 +58,9 @@ class HttpStackApplicationDecorator extends AbstractHttpApplicationDecorator
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $this->requestStack->addRequest($request);
-        $this->responseStack->addResponse($this->responseFactory->createResponse());
-        parent::handle($request);
+        $response = parent::handle($request);
+        $this->responseStack->addResponse($response);
 
-        return $this->responseStack->popResponse();
+        return $response;
     }
 }

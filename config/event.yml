@@ -1,0 +1,5 @@
+http:
+  onRequest:
+    - {alias: event.handler.http, mode: foreground}
+  onResponse:
+    - {alias: event.handler.http, mode: foreground}
