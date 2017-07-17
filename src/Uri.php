@@ -267,4 +267,21 @@ class Uri extends AbstractArray implements UriInterface, ArrayInterface
 
         return ($this->port === self::STANDARD_PORTS[$this->scheme]);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'scheme'   => $this->scheme,
+            'user'     => $this->user,
+            'password' => $this->password,
+            'host'     => $this->host,
+            'port'     => $this->port,
+            'path'     => $this->path,
+            'query'    => $this->query,
+            'fragment' => $this->fragment,
+        ];
+    }
 }

@@ -177,4 +177,12 @@ class StringStream extends AbstractArray implements StreamInterface, ArrayInterf
     {
         return null;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return ['string' => $this->string, 'currentPosition' => $this->currentPosition];
+    }
 }

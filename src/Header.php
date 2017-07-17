@@ -90,6 +90,14 @@ class Header extends AbstractArray implements HeaderInterface, ArrayInterface
     /**
      * @inheritDoc
      */
+    public function toArray(): array
+    {
+        return ['name' => $this->name, 'values' => $this->values];
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function __toString(): string
     {
         return sprintf('%s: %s', $this->getName(), implode(', ', $this->getValues()));

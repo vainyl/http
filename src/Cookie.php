@@ -215,4 +215,20 @@ class Cookie extends AbstractArray implements CookieInterface
 
         return $this;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'name'       => $this->name,
+            'value'      => $this->value,
+            'expiryDate' => $this->expiryDate,
+            'path'       => $this->path,
+            'domain'     => $this->domain,
+            'secure'     => $this->secure,
+            'httpOnly'   => $this->httpOnly,
+        ];
+    }
 }

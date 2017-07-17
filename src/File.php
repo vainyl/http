@@ -128,4 +128,18 @@ class File extends AbstractArray implements UploadedFileInterface, NameableInter
     {
         return $this->mediaType;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'stream'    => $this->stream->toArray(),
+            'size'      => $this->size,
+            'error'     => $this->error,
+            'filename'  => $this->filename,
+            'mediaType' => $this->mediaType,
+        ];
+    }
 }
