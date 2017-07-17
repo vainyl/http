@@ -12,14 +12,15 @@ declare(strict_types=1);
 
 namespace Vainyl\Http;
 
-use Vainyl\Core\AbstractIdentifiable;
+use Vainyl\Core\AbstractArray;
+use Vainyl\Core\ArrayInterface;
 
 /**
  * Class Header
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class Header extends AbstractIdentifiable implements HeaderInterface
+class Header extends AbstractArray implements HeaderInterface, ArrayInterface
 {
     private $name;
 

@@ -13,13 +13,15 @@ declare(strict_types=1);
 namespace Vainyl\Http;
 
 use Psr\Http\Message\StreamInterface;
+use Vainyl\Core\AbstractArray;
+use Vainyl\Core\ArrayInterface;
 
 /**
  * Class StringStream
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class StringStream implements StreamInterface
+class StringStream extends AbstractArray implements StreamInterface, ArrayInterface
 {
     private $string;
 
