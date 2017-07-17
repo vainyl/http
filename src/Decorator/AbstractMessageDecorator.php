@@ -157,6 +157,14 @@ abstract class AbstractMessageDecorator implements MessageInterface, ArrayInterf
     /**
      * @inheritDoc
      */
+    public function jsonSerialize()
+    {
+        return $this->message->jsonSerialize();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function toArray(): array
     {
         return $this->message->toArray();

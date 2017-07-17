@@ -14,8 +14,7 @@ namespace Vainyl\Http;
 
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
-use Vainyl\Core\AbstractIdentifiable;
-use Vainyl\Core\ArrayInterface;
+use Vainyl\Core\AbstractArray;
 use Vainyl\Http\Exception\UnsupportedProtocolException;
 use Vainyl\Http\Factory\HeaderFactoryInterface;
 
@@ -24,7 +23,7 @@ use Vainyl\Http\Factory\HeaderFactoryInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-abstract class AbstractMessage extends AbstractIdentifiable implements MessageInterface, ArrayInterface
+abstract class AbstractMessage extends AbstractArray implements MessageInterface
 {
     const HEADER_CONTENT_TYPE = 'Content-Type';
     const HEADER_EXPIRES = 'Expires';
