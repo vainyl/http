@@ -13,6 +13,7 @@
         }
     },
     "require": {
+        "php": ">=7.1",
         "psr/http-message": "^1",
         "vainyl/core": "dev-master",
         "vainyl/event": "dev-master",
