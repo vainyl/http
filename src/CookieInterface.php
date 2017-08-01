@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http;
 
+use Vainyl\Core\ArrayInterface;
 use Vainyl\Core\NameableInterface;
 use Vainyl\Time\TimeInterface;
 
@@ -20,7 +21,7 @@ use Vainyl\Time\TimeInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface CookieInterface extends NameableInterface
+interface CookieInterface extends NameableInterface, ArrayInterface
 {
     /**
      * @param string $name

@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace Vainyl\Http;
 
 use Psr\Http\Message\StreamInterface;
+use Vainyl\Core\AbstractArray;
+use Vainyl\Core\ArrayInterface;
 use Vainyl\Http\Exception\CannotReadException;
 use Vainyl\Http\Exception\CannotSeekException;
 use Vainyl\Http\Exception\CannotWriteException;
@@ -27,7 +29,7 @@ use Vainyl\Http\Exception\StreamUnavailableException;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class ResourceStream implements StreamInterface
+class ResourceStream extends AbstractArray implements StreamInterface, ArrayInterface
 {
     private $resource;
 
@@ -253,5 +255,13 @@ class ResourceStream implements StreamInterface
         }
 
         return $metadata[$key];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return $this->getMetadata();
     }
 }

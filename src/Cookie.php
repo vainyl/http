@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http;
 
-use Vainyl\Core\AbstractIdentifiable;
+use Vainyl\Core\AbstractArray;
 use Vainyl\Time\TimeInterface;
 
 /**
@@ -20,7 +20,7 @@ use Vainyl\Time\TimeInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class Cookie extends AbstractIdentifiable implements CookieInterface
+class Cookie extends AbstractArray implements CookieInterface
 {
     private $name;
 
@@ -214,5 +214,21 @@ class Cookie extends AbstractIdentifiable implements CookieInterface
         );
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'name'       => $this->name,
+            'value'      => $this->value,
+            'expiryDate' => $this->expiryDate,
+            'path'       => $this->path,
+            'domain'     => $this->domain,
+            'secure'     => $this->secure,
+            'httpOnly'   => $this->httpOnly,
+        ];
     }
 }

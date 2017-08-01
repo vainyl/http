@@ -14,6 +14,9 @@ namespace Vainyl\Http;
 
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileInterface;
+use Vainyl\Core\AbstractArray;
+use Vainyl\Core\ArrayInterface;
+use Vainyl\Core\NameableInterface;
 use Vainyl\Http\Exception\CannotMoveFileException;
 
 /**
@@ -21,7 +24,7 @@ use Vainyl\Http\Exception\CannotMoveFileException;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class File implements UploadedFileInterface
+class File extends AbstractArray implements UploadedFileInterface, NameableInterface, ArrayInterface
 {
     const BUFFER_SIZE = 4096;
 
@@ -51,6 +54,14 @@ class File implements UploadedFileInterface
         $this->error = $error;
         $this->filename = $filename;
         $this->mediaType = $mediaType;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName(): string
+    {
+        return $this->getClientFilename();
     }
 
     /**
@@ -116,5 +127,19 @@ class File implements UploadedFileInterface
     public function getClientMediaType(): string
     {
         return $this->mediaType;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'stream'    => $this->stream->toArray(),
+            'size'      => $this->size,
+            'error'     => $this->error,
+            'filename'  => $this->filename,
+            'mediaType' => $this->mediaType,
+        ];
     }
 }
