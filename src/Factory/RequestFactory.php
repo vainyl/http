@@ -41,12 +41,12 @@ class RequestFactory extends AbstractIdentifiable implements RequestFactoryInter
     /**
      * RequestFactory constructor.
      *
-     * @param HeaderFactoryInterface  $headerFactory
-     * @param CookieFactoryInterface  $cookieFactory
-     * @param StreamFactoryInterface  $streamFactory
-     * @param \ArrayAccess            $headerStorage
-     * @param \ArrayAccess            $cookieStorage
-     * @param \ArrayAccess            $fileStorage
+     * @param HeaderFactoryInterface $headerFactory
+     * @param CookieFactoryInterface $cookieFactory
+     * @param StreamFactoryInterface $streamFactory
+     * @param \ArrayAccess           $headerStorage
+     * @param \ArrayAccess           $cookieStorage
+     * @param \ArrayAccess           $fileStorage
      */
     public function __construct(
         HeaderFactoryInterface $headerFactory,

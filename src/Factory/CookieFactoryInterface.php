@@ -29,7 +29,7 @@ interface CookieFactoryInterface extends IdentifiableInterface
      *
      * @return StorageInterface
      */
-    public function create(array $cookies) : StorageInterface;
+    public function create(array $cookies): StorageInterface;
 
     /**
      * @param string             $name

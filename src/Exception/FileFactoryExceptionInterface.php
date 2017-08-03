@@ -24,5 +24,5 @@ interface FileFactoryExceptionInterface extends \Throwable
     /**
      * @return FileFactoryInterface
      */
-    public function getFileFactory() : FileFactoryInterface;
+    public function getFileFactory(): FileFactoryInterface;
 }

@@ -24,5 +24,5 @@ interface UriExceptionInterface extends \Throwable
     /**
      * @return UriInterface
      */
-    public function getUri() : UriInterface;
+    public function getUri(): UriInterface;
 }

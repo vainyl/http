@@ -26,15 +26,15 @@ interface MessageStackInterface extends MessageInterface
      *
      * @return MessageStackInterface
      */
-    public function addMessage(MessageInterface $message) : MessageStackInterface;
+    public function addMessage(MessageInterface $message): MessageStackInterface;
 
     /**
      * @return MessageInterface
      */
-    public function popMessage() : MessageInterface;
+    public function popMessage(): MessageInterface;
 
     /**
      * @inheritDoc
      */
-    public function getCurrentMessage() : MessageInterface;
+    public function getCurrentMessage(): MessageInterface;
 }

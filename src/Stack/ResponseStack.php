@@ -24,7 +24,7 @@ class ResponseStack extends AbstractMessageStack implements ResponseStackInterfa
     /**
      * @inheritDoc
      */
-    public function addResponse(ResponseInterface $vainResponse) : ResponseStackInterface
+    public function addResponse(ResponseInterface $vainResponse): ResponseStackInterface
     {
         return $this->addMessage($vainResponse);
     }
@@ -32,7 +32,7 @@ class ResponseStack extends AbstractMessageStack implements ResponseStackInterfa
     /**
      * @inheritDoc
      */
-    public function popResponse() : ResponseInterface
+    public function popResponse(): ResponseInterface
     {
         return $this->popMessage();
     }
@@ -40,7 +40,7 @@ class ResponseStack extends AbstractMessageStack implements ResponseStackInterfa
     /**
      * @return ResponseInterface
      */
-    public function getCurrentResponse() : ResponseInterface
+    public function getCurrentResponse(): ResponseInterface
     {
         return $this->getCurrentMessage();
     }

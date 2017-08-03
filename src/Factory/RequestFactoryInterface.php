@@ -30,7 +30,7 @@ interface RequestFactoryInterface extends IdentifiableInterface
      *
      * @return RequestInterface
      */
-    public function createRequest(string $method, UriInterface $uri) : RequestInterface;
+    public function createRequest(string $method, UriInterface $uri): RequestInterface;
 
     /**
      * @param string       $method
@@ -38,12 +38,12 @@ interface RequestFactoryInterface extends IdentifiableInterface
      *
      * @return ServerRequestInterface
      */
-    public function createServerRequest(string $method, UriInterface $uri) : ServerRequestInterface;
+    public function createServerRequest(string $method, UriInterface $uri): ServerRequestInterface;
 
     /**
      * @param array $requestData
      *
      * @return ServerRequestInterface
      */
-    public function create(array $requestData) : ServerRequestInterface;
+    public function create(array $requestData): ServerRequestInterface;
 }
