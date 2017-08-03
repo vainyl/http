@@ -24,7 +24,6 @@ use Vainyl\Http\Uri;
  */
 class UriFactory extends AbstractIdentifiable implements UriFactoryInterface
 {
-
     /**
      * @param array  $array
      * @param string $element

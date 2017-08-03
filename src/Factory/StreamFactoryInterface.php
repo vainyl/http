@@ -27,7 +27,7 @@ interface StreamFactoryInterface extends IdentifiableInterface
      *
      * @return StreamInterface
      */
-    public function createStream(string $content = '') : StreamInterface;
+    public function createStream(string $content = ''): StreamInterface;
 
     /**
      * @param resource $resource

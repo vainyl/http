@@ -33,7 +33,7 @@ class FileFactory extends AbstractIdentifiable implements FileFactoryInterface
      * FileFactory constructor.
      *
      * @param StreamFactoryInterface $streamFactory
-     * @param StorageInterface           $fileStorage
+     * @param StorageInterface       $fileStorage
      */
     public function __construct(StreamFactoryInterface $streamFactory, StorageInterface $fileStorage)
     {

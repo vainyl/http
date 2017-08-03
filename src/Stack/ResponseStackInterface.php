@@ -26,15 +26,15 @@ interface ResponseStackInterface extends ResponseInterface
      *
      * @return ResponseStackInterface
      */
-    public function addResponse(ResponseInterface $vainResponse) : ResponseStackInterface;
+    public function addResponse(ResponseInterface $vainResponse): ResponseStackInterface;
 
     /**
      * @return ResponseInterface
      */
-    public function popResponse() : ResponseInterface;
+    public function popResponse(): ResponseInterface;
 
     /**
      * @return ResponseInterface
      */
-    public function getCurrentResponse() : ResponseInterface;
+    public function getCurrentResponse(): ResponseInterface;
 }
