@@ -15,6 +15,7 @@ services:
       - {name: header.provider, priority: 200}
   header.provider.chain:
     class: Vainyl\Http\Chain\HeaderProviderChain
+    arguments: ['@priority.queue.prototype', '@vector.prototype']
   header.provider: '@header.provider.chain'
   header.storage:
     shared: false
