@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Chain;
 
-use Ds\PriorityQueue;
-use Ds\Vector;
 use Vainyl\Core\AbstractIdentifiable;
+use Vainyl\Core\Collection\VectorInterface;
+use Vainyl\Core\Queue\PriorityQueueInterface;
 use Vainyl\Http\Exception\CannotExtractHeadersException;
 use Vainyl\Http\Provider\HeaderProviderInterface;
 
@@ -25,17 +25,20 @@ use Vainyl\Http\Provider\HeaderProviderInterface;
  */
 class HeaderProviderChain extends AbstractIdentifiable implements HeaderProviderInterface
 {
-    private $factories;
-
     private $queue;
 
+    private $factories;
+
     /**
-     * ConfigSourceChain constructor.
+     * HeaderProviderChain constructor.
+     *
+     * @param PriorityQueueInterface $queue
+     * @param VectorInterface        $vector
      */
-    public function __construct()
+    public function __construct(PriorityQueueInterface $queue, VectorInterface $vector)
     {
-        $this->factories = new Vector();
-        $this->queue = new PriorityQueue();
+        $this->queue = $queue;
+        $this->factories = $vector;
     }
 
     /**
@@ -54,7 +57,7 @@ class HeaderProviderChain extends AbstractIdentifiable implements HeaderProvider
      */
     public function addProvider(int $priority, HeaderProviderInterface $headerProvider): HeaderProviderChain
     {
-        $this->queue->push($headerProvider, $priority);
+        $this->queue->enqueue($headerProvider, $priority);
 
         return $this->configure();
     }
@@ -65,13 +68,11 @@ class HeaderProviderChain extends AbstractIdentifiable implements HeaderProvider
     public function configure(): HeaderProviderChain
     {
         $queue = clone $this->queue;
-        $list = new Vector();
+        $this->factories->clear();
 
-        while (false === $queue->isEmpty()) {
-            $list->push($queue->pop());
+        while (false === $queue->valid()) {
+            $this->factories->push($queue->dequeue());
         }
-
-        $this->factories = $list;
 
         return $this;
     }
@@ -84,7 +85,7 @@ class HeaderProviderChain extends AbstractIdentifiable implements HeaderProvider
         /**
          * @var HeaderProviderInterface $factory
          */
-        foreach (($copy = clone $this->factories) as $factory) {
+        foreach ($this->factories as $factory) {
             if (null === ($headers = $factory->getHeaders($data))) {
                 continue;
             }
