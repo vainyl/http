@@ -19,12 +19,12 @@ services:
   header.storage:
     shared: false
     class: Vainyl\Http\Storage\HeaderStorage
-    arguments: ['@storage.prototype']
-  file.storage: '@storage.prototype'
+    arguments: ['@map.prototype']
+  file.storage: '@map.prototype'
   cookie.storage:
     shared: false
     class: Vainyl\Http\Storage\CookieStorage
-    arguments: ['@storage.prototype']
+    arguments: ['@map.prototype']
   stream.factory:
     class: Vainyl\Http\Factory\StreamFactory
   file.factory:
@@ -32,7 +32,7 @@ services:
     arguments: ['@stream.factory', '@file.storage']
   cookie.factory:
     class: Vainyl\Http\Factory\CookieFactory
-    arguments: ['@storage.prototype']
+    arguments: ['@map.prototype']
   stream.factory:
     class: Vainyl\Http\Factory\StreamFactory
   uri.factory:
