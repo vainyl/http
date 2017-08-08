@@ -26,6 +26,6 @@ class HttpExtension extends AbstractFrameworkExtension
      */
     public function getCompilerPasses(): array
     {
-        return [new HeaderProviderCompilerPass()];
+        return [[new HeaderProviderCompilerPass()]];
     }
 }
