@@ -13,13 +13,14 @@ declare(strict_types=1);
 namespace Vainyl\Http\Exception;
 
 use Psr\Http\Message\StreamInterface;
+use Vainyl\Core\Exception\CoreExceptionInterface;
 
 /**
  * Interface StreamExceptionInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface StreamExceptionInterface extends \Throwable
+interface StreamExceptionInterface extends CoreExceptionInterface
 {
     /**
      * @return StreamInterface

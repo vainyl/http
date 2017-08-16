@@ -30,13 +30,13 @@ abstract class AbstractFileException extends AbstractCoreException implements Fi
      * @param UploadedFileInterface $file
      * @param string                $message
      * @param int                   $code
-     * @param \Exception|null       $previous
+     * @param \Throwable|null       $previous
      */
     public function __construct(
         UploadedFileInterface $file,
         string $message,
         int $code = 500,
-        \Exception $previous = null
+        \Throwable $previous = null
     ) {
         $this->file = $file;
         parent::__construct($message, $code, $previous);

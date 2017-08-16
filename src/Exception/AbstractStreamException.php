@@ -30,9 +30,9 @@ abstract class AbstractStreamException extends AbstractCoreException implements 
      * @param StreamInterface $stream
      * @param string          $message
      * @param int             $code
-     * @param \Exception|null $previous
+     * @param \Throwable|null $previous
      */
-    public function __construct(StreamInterface $stream, string $message, int $code = 500, \Exception $previous = null)
+    public function __construct(StreamInterface $stream, string $message, int $code = 500, \Throwable $previous = null)
     {
         $this->stream = $stream;
         parent::__construct($message, $code, $previous);

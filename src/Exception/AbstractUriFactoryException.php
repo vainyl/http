@@ -30,13 +30,13 @@ abstract class AbstractUriFactoryException extends AbstractCoreException impleme
      * @param UriFactoryInterface $uriFactory
      * @param string              $message
      * @param int                 $code
-     * @param \Exception|null     $previous
+     * @param \Throwable|null     $previous
      */
     public function __construct(
         UriFactoryInterface $uriFactory,
         string $message,
         int $code = 500,
-        \Exception $previous = null
+        \Throwable $previous = null
     ) {
         $this->uriFactory = $uriFactory;
         parent::__construct($message, $code, $previous);

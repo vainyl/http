@@ -13,13 +13,14 @@ declare(strict_types=1);
 namespace Vainyl\Http\Exception;
 
 use Psr\Http\Message\MessageInterface;
+use Vainyl\Core\Exception\CoreExceptionInterface;
 
 /**
  * Interface MessageExceptionInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface MessageExceptionInterface extends \Throwable
+interface MessageExceptionInterface extends CoreExceptionInterface
 {
     /**
      * @return MessageInterface

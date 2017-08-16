@@ -30,13 +30,13 @@ class AbstractFileFactoryException extends AbstractCoreException implements File
      * @param FileFactoryInterface $fileFactory
      * @param string               $message
      * @param int                  $code
-     * @param \Exception|null      $previous
+     * @param \Throwable|null      $previous
      */
     public function __construct(
         FileFactoryInterface $fileFactory,
         string $message,
         int $code = 500,
-        \Exception $previous = null
+        \Throwable $previous = null
     ) {
         $this->fileFactory = $fileFactory;
         parent::__construct($message, $code, $previous);

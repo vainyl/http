@@ -30,9 +30,9 @@ abstract class AbstractUriException extends AbstractCoreException implements Uri
      * @param UriInterface    $uri
      * @param string          $message
      * @param int             $code
-     * @param \Exception|null $previous
+     * @param \Throwable|null $previous
      */
-    public function __construct(UriInterface $uri, string $message, int $code = 500, \Exception $previous = null)
+    public function __construct(UriInterface $uri, string $message, int $code = 500, \Throwable $previous = null)
     {
         $this->uri = $uri;
         parent::__construct($message, $code, $previous);

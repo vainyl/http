@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Exception;
 
+use Vainyl\Core\Exception\CoreExceptionInterface;
 use Vainyl\Http\Provider\HeaderProviderInterface;
 
 /**
@@ -19,7 +20,7 @@ use Vainyl\Http\Provider\HeaderProviderInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface HeaderProviderExceptionInterface extends \Throwable
+interface HeaderProviderExceptionInterface extends CoreExceptionInterface
 {
     /**
      * @return HeaderProviderInterface

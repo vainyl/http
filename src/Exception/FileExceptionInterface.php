@@ -13,13 +13,14 @@ declare(strict_types=1);
 namespace Vainyl\Http\Exception;
 
 use Psr\Http\Message\UploadedFileInterface;
+use Vainyl\Core\Exception\CoreExceptionInterface;
 
 /**
  * Interface FileExceptionInterface
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface FileExceptionInterface extends \Throwable
+interface FileExceptionInterface extends CoreExceptionInterface
 {
     /**
      * @return UploadedFileInterface
