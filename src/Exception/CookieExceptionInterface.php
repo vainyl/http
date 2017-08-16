@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Exception;
 
+use Vainyl\Core\Exception\CoreExceptionInterface;
 use Vainyl\Http\CookieInterface;
 
 /**
@@ -19,7 +20,7 @@ use Vainyl\Http\CookieInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface CookieExceptionInterface extends \Throwable
+interface CookieExceptionInterface extends CoreExceptionInterface
 {
     /**
      * @return CookieInterface

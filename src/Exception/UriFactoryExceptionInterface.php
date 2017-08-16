@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Vainyl\Http\Exception;
 
+use Vainyl\Core\Exception\CoreExceptionInterface;
 use Vainyl\Http\Factory\UriFactoryInterface;
 
 /**
@@ -19,7 +20,7 @@ use Vainyl\Http\Factory\UriFactoryInterface;
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-interface UriFactoryExceptionInterface extends \Throwable
+interface UriFactoryExceptionInterface extends CoreExceptionInterface
 {
     /**
      * @return UriFactoryInterface

@@ -30,9 +30,9 @@ abstract class AbstractCookieException extends AbstractCoreException implements 
      * @param CookieInterface $cookie
      * @param string          $message
      * @param int             $code
-     * @param \Exception|null $previous
+     * @param \Throwable|null $previous
      */
-    public function __construct(CookieInterface $cookie, string $message, int $code = 500, \Exception $previous = null)
+    public function __construct(CookieInterface $cookie, string $message, int $code = 500, \Throwable $previous = null)
     {
         $this->cookie = $cookie;
         parent::__construct($message, $code, $previous);

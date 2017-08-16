@@ -30,13 +30,13 @@ abstract class AbstractHeaderProviderException extends AbstractCoreException imp
      * @param HeaderProviderInterface $provider
      * @param string                  $message
      * @param int                     $code
-     * @param \Exception|null         $previous
+     * @param \Throwable|null         $previous
      */
     public function __construct(
         HeaderProviderInterface $provider,
         string $message,
         int $code = 500,
-        \Exception $previous = null
+        \Throwable $previous = null
     ) {
         $this->provider = $provider;
         parent::__construct($message, $code, $previous);

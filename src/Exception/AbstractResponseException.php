@@ -30,13 +30,13 @@ abstract class AbstractResponseException extends AbstractCoreException implement
      * @param ResponseInterface $response
      * @param string            $message
      * @param int               $code
-     * @param \Exception|null   $previous
+     * @param \Throwable|null   $previous
      */
     public function __construct(
         ResponseInterface $response,
         string $message,
         int $code = 500,
-        \Exception $previous = null
+        \Throwable $previous = null
     ) {
         $this->response = $response;
         parent::__construct($message, $code, $previous);
