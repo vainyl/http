@@ -26,6 +26,9 @@
             "url": "https://satis.vainyl.com:444"
         }
     ],
+    "provide": {
+        "psr/http-message": "1.0.1"
+    },
     "prefer-stable": true,
     "minimum-stability": "dev"
 }
