@@ -22,20 +22,21 @@ use Vainyl\Http\Factory\HeaderFactoryInterface;
  * Class AbstractMessage
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
+ * @author Andrii Dembitskiy <andrew.dembitskiy@gmail.com>
  */
 abstract class AbstractMessage extends AbstractArray implements MessageInterface
 {
-    const HEADER_CONTENT_TYPE = 'Content-Type';
-    const HEADER_EXPIRES = 'Expires';
-    const HEADER_LOCATION = 'Location';
-    const HEADER_CONTENT_DESCRIPTION = 'Content-Description';
-    const HEADER_CONTENT_DISPOSITION = 'Content-Disposition';
+    const HEADER_CONTENT_TYPE              = 'Content-Type';
+    const HEADER_EXPIRES                   = 'Expires';
+    const HEADER_LOCATION                  = 'Location';
+    const HEADER_CONTENT_DESCRIPTION       = 'Content-Description';
+    const HEADER_CONTENT_DISPOSITION       = 'Content-Disposition';
     const HEADER_CONTENT_TRANSFER_ENCODING = 'Content-Transfer-Encoding';
-    const HEADER_CONTENT_LENGTH = 'Content-Length';
-    const CONTENT_TYPE_APPLICATION_JSON = 'application/json';
-    const CONTENT_TYPE_URL_ENCODED = 'application/x-www-form-urlencoded';
-    const CONTENT_TYPE_FORM_DATA = 'multipart/form-data';
-    const SUPPORTED_VERSIONS = ['1.0', '1.1', '2'];
+    const HEADER_CONTENT_LENGTH            = 'Content-Length';
+    const CONTENT_TYPE_APPLICATION_JSON    = 'application/json';
+    const CONTENT_TYPE_URL_ENCODED         = 'application/x-www-form-urlencoded';
+    const CONTENT_TYPE_FORM_DATA           = 'multipart/form-data';
+    const SUPPORTED_VERSIONS               = ['1.0', '1.1', '2'];
 
     private $protocol = '1.1';
 
@@ -58,7 +59,7 @@ abstract class AbstractMessage extends AbstractArray implements MessageInterface
         StreamInterface $stream
     ) {
         $this->headerFactory = $headerFactory;
-        $this->stream = $stream;
+        $this->stream        = $stream;
         $this->headerStorage = $headerStorage;
     }
 
@@ -78,7 +79,7 @@ abstract class AbstractMessage extends AbstractArray implements MessageInterface
         if (false === in_array($protocol, self::SUPPORTED_VERSIONS)) {
             throw new UnsupportedProtocolException($this, $protocol);
         }
-        $copy = clone $this;
+        $copy           = clone $this;
         $copy->protocol = $protocol;
 
         return $copy;
@@ -109,8 +110,12 @@ abstract class AbstractMessage extends AbstractArray implements MessageInterface
      */
     public function withHeader($name, $value): MessageInterface
     {
-        $copy = clone $this;
-        $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, [$value]);
+        if (false === is_array($value)) {
+            $value = [$value];
+        }
+
+        $copy                       = clone $this;
+        $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, $value);
 
         return $copy;
     }
@@ -120,11 +125,17 @@ abstract class AbstractMessage extends AbstractArray implements MessageInterface
      */
     public function withAddedHeader($name, $value): MessageInterface
     {
+        if (false === is_array($value)) {
+            $value = [$value];
+        }
+
         $copy = clone $this;
         if (false === $copy->headerStorage->offsetExists($name)) {
-            $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, [$value]);
-        } else {
-            $copy->headerStorage[$name]->addValue($value);
+            $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, []);
+        }
+
+        foreach ($value as $headerValue) {
+            $copy->headerStorage[$name]->addValue($headerValue);
         }
 
         return $copy;
@@ -154,7 +165,7 @@ abstract class AbstractMessage extends AbstractArray implements MessageInterface
      */
     public function withBody(StreamInterface $body): MessageInterface
     {
-        $copy = clone $this;
+        $copy         = clone $this;
         $copy->stream = $body;
 
         return $copy;
