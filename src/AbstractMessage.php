@@ -131,12 +131,14 @@ abstract class AbstractMessage extends AbstractArray implements MessageInterface
 
         $copy = clone $this;
         if (false === $copy->headerStorage->offsetExists($name)) {
-            $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, []);
+            $copy->headerStorage[$name] = $this->headerFactory->createHeader($name, $value);
+        } else {
+            $namedHeaderStorage = $copy->headerStorage[$name];
+            foreach ($value as $headerValue) {
+                $namedHeaderStorage->addValue($headerValue);
+            }
         }
 
-        foreach ($value as $headerValue) {
-            $copy->headerStorage[$name]->addValue($headerValue);
-        }
 
         return $copy;
     }
