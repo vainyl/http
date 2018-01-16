@@ -70,7 +70,7 @@ class HeaderProviderChain extends AbstractIdentifiable implements HeaderProvider
         $queue = clone $this->queue;
         $this->factories->clear();
 
-        while (false === $queue->valid()) {
+        while ($queue->valid()) {
             $this->factories->push($queue->dequeue());
         }
 
