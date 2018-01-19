@@ -34,8 +34,6 @@ services:
   cookie.factory:
     class: Vainyl\Http\Factory\CookieFactory
     arguments: ['@map.prototype']
-  stream.factory:
-    class: Vainyl\Http\Factory\StreamFactory
   uri.factory:
     class: Vainyl\Http\Factory\UriFactory
   request.stack:
@@ -44,6 +42,7 @@ services:
     class: Vainyl\Http\Stack\ResponseStack
   emitter.factory:
     class: Vainyl\Http\Factory\EmitterSapiFactory
+    public: true
   emitter.factory.logger:
     decorates: emitter.factory
     class: Vainyl\Http\Factory\Decorator\LoggerEmitterFactoryDecorator
